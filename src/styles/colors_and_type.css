@@ -1,0 +1,195 @@
+/* ============================================================
+   TAKO DESIGN SYSTEM — Colors & Type
+   Rideshare. Cameroon. Black, white, and the open road.
+   ============================================================ */
+
+/* ---- Fonts (Google Fonts substitutes — see README) ----
+   Brand wordmark ≈ geometric sans. Until the licensed brand
+   face is supplied, we standardize on:
+     Display / Brand  → Plus Jakarta Sans
+     Text / UI        → Manrope
+     Mono / Data      → Space Mono
+*/
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* ---------- BRAND ---------- */
+  --tako-black:      #0A0A0A;   /* ring, ink, primary surface */
+  --tako-charcoal:   #2A2B2A;   /* badge interior, dark panels */
+  --tako-amber:      #F7951D;   /* signature lane-line accent  */
+  --tako-amber-deep: #E07E0A;   /* pressed / hover amber       */
+  --tako-amber-soft: #FFEED6;   /* amber tint wash             */
+  --tako-white:      #FFFFFF;   /* road markings, light surface*/
+
+  /* ---------- NEUTRAL RAMP (warm-cool gray, road asphalt) ---------- */
+  --gray-950: #0A0A0A;
+  --gray-900: #161716;
+  --gray-800: #2A2B2A;
+  --gray-700: #3D3E3D;
+  --gray-600: #5A5C5A;
+  --gray-500: #7C7E7C;
+  --gray-400: #A2A4A2;
+  --gray-300: #C8CAC8;
+  --gray-200: #E3E4E3;
+  --gray-100: #F1F2F1;
+  --gray-50:  #F8F9F8;
+
+  /* ---------- SEMANTIC / FOREGROUND ---------- */
+  --fg-1: var(--gray-950);   /* primary text */
+  --fg-2: var(--gray-600);   /* secondary text */
+  --fg-3: var(--gray-500);   /* tertiary / captions */
+  --fg-inverse: var(--white, #fff);
+  --fg-accent: var(--tako-amber-deep);
+
+  /* ---------- BACKGROUNDS ---------- */
+  --bg-1: #FFFFFF;           /* base page */
+  --bg-2: var(--gray-50);    /* subtle raised */
+  --bg-3: var(--gray-100);   /* sunken / fields */
+  --bg-dark: var(--tako-black);
+  --bg-charcoal: var(--tako-charcoal);
+
+  /* ---------- BORDERS ---------- */
+  --border-1: var(--gray-200);
+  --border-2: var(--gray-300);
+  --border-strong: var(--gray-950);
+
+  /* ---------- STATUS ---------- */
+  --success: #1F9D55;
+  --success-bg: #E6F5EC;
+  --warning: #F7951D;
+  --warning-bg: #FFEED6;
+  --error:   #DA3633;
+  --error-bg:#FBEAEA;
+  --info:    #2563EB;
+  --info-bg: #E8EEFD;
+
+  /* ---------- RADII ---------- */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* ---------- SPACING (4pt base) ---------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+
+  /* ---------- ELEVATION ---------- */
+  --shadow-sm: 0 1px 2px rgba(10,10,10,0.06), 0 1px 1px rgba(10,10,10,0.04);
+  --shadow-md: 0 4px 12px rgba(10,10,10,0.08), 0 2px 4px rgba(10,10,10,0.04);
+  --shadow-lg: 0 12px 32px rgba(10,10,10,0.12), 0 4px 8px rgba(10,10,10,0.06);
+  --shadow-xl: 0 24px 56px rgba(10,10,10,0.18);
+  --shadow-amber: 0 8px 24px rgba(247,149,29,0.35);
+
+  /* ---------- TYPE FAMILIES ---------- */
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-text:    'Manrope', system-ui, sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, monospace;
+
+  /* ---------- TYPE SCALE ---------- */
+  --t-display:   clamp(40px, 6vw, 72px);
+  --t-h1:        clamp(32px, 4vw, 48px);
+  --t-h2:        32px;
+  --t-h3:        24px;
+  --t-h4:        20px;
+  --t-body-lg:   18px;
+  --t-body:      16px;
+  --t-sm:        14px;
+  --t-xs:        12px;
+
+  --lh-tight: 1.05;
+  --lh-snug:  1.2;
+  --lh-base:  1.5;
+
+  --tracking-tight: -0.02em;
+  --tracking-flat: 0;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.08em;
+}
+
+/* ============================================================
+   SEMANTIC TYPE CLASSES
+   ============================================================ */
+.tako-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--t-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+.tako-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--t-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+.tako-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+.tako-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-h3);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+.tako-h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-h4);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+.tako-body-lg {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: var(--t-body-lg);
+  line-height: var(--lh-base);
+  color: var(--fg-2);
+}
+.tako-body {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: var(--lh-base);
+  color: var(--fg-2);
+}
+.tako-sm {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: var(--t-sm);
+  line-height: var(--lh-base);
+  color: var(--fg-2);
+}
+.tako-overline {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: var(--t-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.tako-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--t-sm);
+  letter-spacing: var(--tracking-flat);
+  color: var(--fg-1);
+}
