@@ -225,8 +225,8 @@ function DownloadBand() {
           </p>
         </div>
         <div style={{ position: 'relative', display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-          <a className="store-btn" href="https://apps.apple.com/" target="_blank" rel="noopener" style={{ textDecoration: 'none' }}><AppleLogo size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>{t('Download on the', 'Télécharger sur l’')}</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>App Store</div></div></a>
-          <a className="store-btn" href="https://play.google.com/" target="_blank" rel="noopener" style={{ textDecoration: 'none' }}><SIcon name="play" size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>{t('Get it on', 'Disponible sur')}</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>Google Play</div></div></a>
+          <a className="store-btn" href="app.html" style={{ textDecoration: 'none' }}><AppleLogo size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>{t('Download on the', 'Télécharger sur l’')}</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>App Store</div></div></a>
+          <a className="store-btn" href="app.html" style={{ textDecoration: 'none' }}><SIcon name="play" size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>{t('Get it on', 'Disponible sur')}</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>Google Play</div></div></a>
         </div>
       </div>
     </section>
@@ -237,11 +237,12 @@ function Footer() {
   const cols = [
     [t('Ride', 'Course'), [['Reserve', 'reserve.html', 'Réserver'], ['Airport rides', 'airport.html', 'Trajets aéroport'], ['Cities', 'cities.html', 'Villes'], ['Safety', 'safety.html', 'Sécurité'], ['Tako Business', 'business.html', 'Tako Entreprise'], ['Help Centre', 'help.html', 'Centre d’aide']]],
     [t('Drive', 'Conduire'), [['Become a driver', 'drive.html', 'Devenir chauffeur'], ['Requirements', 'requirements.html', 'Conditions'], ['Driver app', 'driver-app.html', 'App chauffeur'], ['Earnings', 'earnings.html', 'Revenus']]],
-    [t('Company', 'Entreprise'), [['About', 'about.html', 'À propos'], ['Careers', 'careers.html', 'Carrières'], ['Newsroom', 'newsroom.html', 'Actualités'], ['Contact', 'contact.html', 'Contact']]],
+    [t('Company', 'Entreprise'), [['About', 'about.html', 'À propos'], ['Careers', 'careers.html', 'Carrières'], ['Newsroom', 'newsroom.html', 'Actualités'], ['Contact', 'contact.html', 'Contact'], ['How it works', 'how-it-works.html', 'Comment ça marche'], ['Gift cards', 'gift-cards.html', 'Cartes cadeaux'], ['Sustainability', 'sustainability.html', 'Durabilité'], ['Press kit', 'press-kit.html', 'Kit presse']]],
+    [t('Legal', 'Mentions légales'), [['Terms', 'terms.html', 'Conditions'], ['Privacy', 'privacy.html', 'Confidentialité'], ['Cookies', 'cookies.html', 'Cookies'], ['Accessibility', 'accessibility.html', 'Accessibilité']]],
   ];
   return (
     <footer style={{ background: 'var(--tako-black)', color: '#fff' }}>
-      <div style={{ ...WRAP, display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: 40, paddingTop: 72, paddingBottom: 40 }} className="grid-4 stack-pad">
+      <div style={{ ...WRAP, display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr', gap: 40, paddingTop: 72, paddingBottom: 40 }} className="grid-4 stack-pad">
         <div>
           <SiteLogo dark />
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--gray-500)', margin: '16px 0 20px', maxWidth: 250, lineHeight: 1.5 }}>
