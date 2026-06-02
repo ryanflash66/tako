@@ -123,6 +123,35 @@ function Standards() {
   );
 }
 
+function SafetyTopics() {
+  const topics = [
+    ['shield-check', tr('Verified drivers & vehicles', 'Chauffeurs et véhicules vérifiés'), tr('How we screen every driver and inspect every car before the first ride.', 'Comment nous contrôlons chaque chauffeur et inspectons chaque voiture avant la première course.'), 'safety-driver-screening.html'],
+    ['share-2', tr('Share your trip', 'Partagez votre trajet'), tr('Let trusted contacts follow your live route and ETA until you arrive.', 'Laissez vos proches suivre votre itinéraire en direct et votre heure d’arrivée jusqu’à l’arrivée.'), 'safety-share-trip.html'],
+    ['siren', tr('Emergency & RideCheck', 'Urgence et RideCheck'), tr('One-tap help and automatic check-ins when a trip looks out of the ordinary.', 'Aide en une tape et vérifications automatiques quand un trajet semble inhabituel.'), 'safety-emergency.html'],
+    ['shield', tr('Community guidelines', 'Règles de la communauté'), tr('The standards of respect we hold riders and drivers to — and how we enforce them.', 'Les standards de respect que nous imposons aux passagers et chauffeurs — et comment nous les appliquons.'), 'safety-community-guidelines.html'],
+    ['handshake', tr('Insurance on every trip', 'Assurance sur chaque trajet'), tr('The cover that protects riders and drivers if the unexpected happens.', 'La couverture qui protège passagers et chauffeurs en cas d’imprévu.'), 'safety-insurance.html'],
+  ];
+  return (
+    <section style={{ ...WRAP, paddingTop: 16, paddingBottom: 96 }} className="stack-pad">
+      <SectionHead over={tr('Explore safety', 'Explorer la sécurité')} title={tr('Safety topics, in depth', 'Les sujets sécurité, en détail')} sub={tr('Dive deeper into the features that keep every Tako trip safe.', 'Découvrez en détail les fonctionnalités qui sécurisent chaque trajet Tako.')} />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }} className="grid-3">
+        {topics.map(([ic, t, d, href], i) => (
+          <Reveal key={href} delay={(i % 3) * 70} style={{ display: 'flex' }}>
+            <a href={href} style={{ display: 'flex', flexDirection: 'column', flex: 1, textDecoration: 'none', color: 'inherit', border: '1px solid var(--border-1)', borderRadius: 18, padding: 28, background: '#fff' }}>
+              <div style={{ width: 52, height: 52, borderRadius: 14, background: 'var(--tako-amber-soft)', color: 'var(--tako-amber-deep)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}><SIcon name={ic} size={26} /></div>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 20, margin: '0 0 6px' }}>{t}</h3>
+              <p style={{ fontFamily: 'var(--font-text)', fontSize: 15, color: 'var(--fg-2)', lineHeight: 1.5, margin: '0 0 18px' }}>{d}</p>
+              <span style={{ marginTop: 'auto', display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 15, color: 'var(--tako-amber-deep)' }}>
+                {tr('Learn more', 'En savoir plus')}<SIcon name="arrow-right" size={17} />
+              </span>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function EmergencyBand() {
   return (
     <section style={{ ...WRAP, paddingTop: 16, paddingBottom: 96 }} className="stack-pad">
@@ -147,6 +176,7 @@ function Safety() {
       <PhaseTabs />
       <Commitments />
       <Standards />
+      <SafetyTopics />
       <EmergencyBand />
       <DownloadBand />
       <Footer />
