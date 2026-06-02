@@ -109,21 +109,21 @@ function FAQList({ query }) {
 
 function ContactBand() {
   const opts = [
-    ['message-circle', 'Chat in the app', 'Fastest way to reach us — open the app and tap Help.', 'Open chat'],
-    ['mail', 'Email support', 'support@tako.cm · we reply within one business day.', 'Send email'],
-    ['phone', 'Call us', 'Mon–Sat, 8am–8pm WAT for urgent ride issues.', 'See number'],
+    ['message-circle', 'Chat in the app', 'Fastest way to reach us — open the app and tap Help.', 'Open chat', 'auth.html'],
+    ['mail', 'Email support', 'support@tako.cm · we reply within one business day.', 'Send email', 'mailto:support@tako.cm'],
+    ['phone', 'Call us', '+237 233 00 00 00 · Mon–Sat, 8am–8pm WAT for urgent ride issues.', 'Call now', 'tel:+237233000000'],
   ];
   return (
     <section style={{ background: 'var(--bg-2)', paddingTop: 88, paddingBottom: 96, borderTop: '1px solid var(--border-1)' }}>
       <div style={WRAP} className="stack-pad">
         <SectionHead over="Still stuck?" title="Talk to a human" sub="Our support team is based in Cameroon and ready to help with anything the articles didn’t cover." />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }} className="grid-3">
-          {opts.map(([ic, t, d, cta], i) => (
+          {opts.map(([ic, t, d, cta, href], i) => (
             <Reveal key={t} delay={i * 70} style={{ background: '#fff', border: '1px solid var(--border-1)', borderRadius: 20, padding: 30, display: 'flex', flexDirection: 'column' }}>
               <div style={{ width: 52, height: 52, borderRadius: 14, background: 'var(--tako-amber-soft)', color: 'var(--tako-amber-deep)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}><SIcon name={ic} size={26} /></div>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 20, margin: '0 0 8px' }}>{t}</h3>
               <p style={{ fontFamily: 'var(--font-text)', fontSize: 15, color: 'var(--fg-2)', lineHeight: 1.5, margin: '0 0 20px', flex: 1 }}>{d}</p>
-              <a href="#" className="link-amber" style={{ fontSize: 15 }}>{cta} <SIcon name="arrow-right" size={17} /></a>
+              <a href={href} className="link-amber" style={{ fontSize: 15 }}>{cta} <SIcon name="arrow-right" size={17} /></a>
             </Reveal>
           ))}
         </div>

@@ -282,7 +282,7 @@ function TermsStep({ data, set, onBack, onNext }) {
     <div>
       <h1 style={titleStyle}>Accept Tako’s Terms &amp; review Privacy Notice</h1>
       <p style={subStyle}>
-        By selecting “I agree” below, I have reviewed and agree to the <a href="#" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>Terms of Use</a> and acknowledge the <a href="#" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>Privacy Notice</a>. I am at least 18 years of age.
+        By selecting “I agree” below, I have reviewed and agree to the <a href="terms.html" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>Terms of Use</a> and acknowledge the <a href="privacy.html" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>Privacy Notice</a>. I am at least 18 years of age.
       </p>
       <div style={{ height: 1, background: 'var(--border-1)', margin: '32px 0 24px' }} />
       <button onClick={() => { setAgree(a => !a); set({ agree: !agree }); }} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>

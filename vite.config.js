@@ -1,6 +1,15 @@
 import { defineConfig } from 'vite';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { readdirSync } from 'node:fs';
+
+// Every root-level *.html is a page entry, so new pages are picked up
+// automatically without editing this config.
+const htmlInputs = Object.fromEntries(
+  readdirSync('.')
+    .filter((f) => f.endsWith('.html'))
+    .map((f) => [f.replace(/\.html$/, ''), f]),
+);
 
 // The Tako pages were authored as classic in-browser-Babel scripts: they read
 // `React` / `ReactDOM` / `lucide` / `L` off `window` and share components via
@@ -29,16 +38,7 @@ export default defineConfig({
   build: {
     target: 'es2020',
     rollupOptions: {
-      input: {
-        index: 'index.html',
-        ride: 'ride.html',
-        drive: 'drive.html',
-        cities: 'cities.html',
-        business: 'business.html',
-        safety: 'safety.html',
-        help: 'help.html',
-        auth: 'auth.html',
-      },
+      input: htmlInputs,
     },
   },
 });

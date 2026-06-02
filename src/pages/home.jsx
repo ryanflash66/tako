@@ -82,14 +82,22 @@ function LiveMapBg() {
     // OSRM (real road network) — route + snap helpers, so cars stay on the streets.
     let alive = true;
     const OSRM = 'https://router.project-osrm.org';
+    // OSRM is a public demo server — guard every call with a timeout so a hung
+    // request can't stall the animation; callers fall back to straight lines.
+    const fetchJSON = async (url, ms = 4000) => {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), ms);
+      try { return await (await fetch(url, { signal: ctrl.signal })).json(); }
+      finally { clearTimeout(timer); }
+    };
     async function roadRoute(a, b) {
       const url = OSRM + '/route/v1/driving/' + a[1] + ',' + a[0] + ';' + b[1] + ',' + b[0] + '?overview=full&geometries=geojson';
-      const j = await (await fetch(url)).json();
+      const j = await fetchJSON(url);
       if (j.code !== 'Ok' || !j.routes || !j.routes[0]) throw new Error('no route');
       return j.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
     }
     async function snapToRoad(la, ln) {
-      const j = await (await fetch(OSRM + '/nearest/v1/driving/' + ln + ',' + la)).json();
+      const j = await fetchJSON(OSRM + '/nearest/v1/driving/' + ln + ',' + la);
       if (!j.waypoints || !j.waypoints[0]) throw new Error('no snap');
       const loc = j.waypoints[0].location;
       return [loc[1], loc[0]];
@@ -221,7 +229,7 @@ function Hero() {
 }
 
 function StatsBar() {
-  const stats = [['12', 'cities live'], ['8,000+', 'active drivers'], ['2 min', 'avg pickup'], ['4.9★', 'avg trip rating']];
+  const stats = [['11', 'cities live'], ['8,000+', 'active drivers'], ['2 min', 'avg pickup'], ['4.9★', 'avg trip rating']];
   return (
     <div style={{ borderTop: '1px solid var(--border-1)', borderBottom: '1px solid var(--border-1)', background: 'var(--bg-2)' }}>
       <div style={{ ...WRAP, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24, paddingTop: 32, paddingBottom: 32 }} className="grid-4 stack-pad">
@@ -238,9 +246,9 @@ function StatsBar() {
 
 function Tiers() {
   const data = [
-    { icon: 'car', name: 'Tako Go', desc: 'Affordable everyday rides for getting around town.', price: '2 500', seats: '4' },
-    { icon: 'car-front', name: 'Tako Comfort', desc: 'Newer cars, extra legroom, top-rated drivers.', price: '3 800', seats: '4' },
-    { icon: 'users', name: 'Tako XL', desc: 'Roomy rides for groups of up to six passengers.', price: '5 200', seats: '6' },
+    { icon: 'car', name: 'Tako Go', desc: 'Affordable everyday rides for getting around town.', price: '1 620', seats: '4' },
+    { icon: 'car-front', name: 'Tako Comfort', desc: 'Newer cars, extra legroom, top-rated drivers.', price: '2 460', seats: '4' },
+    { icon: 'users', name: 'Tako XL', desc: 'Roomy rides for groups of up to six passengers.', price: '3 220', seats: '6' },
   ];
   return (
     <section style={{ background: 'var(--bg-2)', paddingTop: 96, paddingBottom: 96 }}>
