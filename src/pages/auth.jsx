@@ -1,12 +1,13 @@
 /* Tako — Onboarding / auth flow. A functional multi-step wizard. */
+import { t as tr } from '../lib/i18n.js';
 
 const COUNTRIES = [
-  { code: 'CM', dial: '+237', name: 'Cameroon' },
-  { code: 'NG', dial: '+234', name: 'Nigeria' },
+  { code: 'CM', dial: '+237', name: tr('Cameroon', 'Cameroun') },
+  { code: 'NG', dial: '+234', name: tr('Nigeria', 'Nigéria') },
   { code: 'GA', dial: '+241', name: 'Gabon' },
-  { code: 'TD', dial: '+235', name: 'Chad' },
+  { code: 'TD', dial: '+235', name: tr('Chad', 'Tchad') },
   { code: 'FR', dial: '+33', name: 'France' },
-  { code: 'US', dial: '+1', name: 'United States' },
+  { code: 'US', dial: '+1', name: tr('United States', 'États-Unis') },
 ];
 
 const isEmail = (v) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim());
@@ -53,7 +54,7 @@ function NavButtons({ onBack, onNext, nextLabel = 'Next', nextDisabled, showBack
         style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8, border: 'none', borderRadius: 999, padding: '15px 28px', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 16,
           cursor: nextDisabled ? 'not-allowed' : 'pointer', background: nextDisabled ? 'var(--bg-3)' : 'var(--tako-black)', color: nextDisabled ? 'var(--gray-400)' : '#fff', transition: 'background .15s, transform .12s' }}
         onMouseDown={e => { if (!nextDisabled) e.currentTarget.style.transform = 'scale(0.97)'; }} onMouseUp={e => e.currentTarget.style.transform = 'none'} onMouseLeave={e => e.currentTarget.style.transform = 'none'}>
-        {nextLabel} <SIcon name="arrow-right" size={18} />
+        {nextLabel === 'Next' ? tr('Next', 'Suivant') : nextLabel} <SIcon name="arrow-right" size={18} />
       </button>
     </div>
   );
@@ -106,9 +107,9 @@ function EntryStep({ data, set, onContinue, onSocial, onQR }) {
   const emailMode = isEmail(val) || (val.includes('@'));
   const submit = () => {
     const v = val.trim();
-    if (!v) { setErr('Please enter a mobile number or email.'); return; }
-    if (emailMode && !isEmail(v)) { setErr('Enter a valid email address.'); return; }
-    if (!emailMode && !isPhoneish(v)) { setErr('Enter a valid mobile number.'); return; }
+    if (!v) { setErr(tr('Please enter a mobile number or email.', 'Veuillez saisir un numéro de mobile ou un e-mail.')); return; }
+    if (emailMode && !isEmail(v)) { setErr(tr('Enter a valid email address.', 'Saisissez une adresse e-mail valide.')); return; }
+    if (!emailMode && !isPhoneish(v)) { setErr(tr('Enter a valid mobile number.', 'Saisissez un numéro de mobile valide.')); return; }
     // demo: numbers containing "000" are "blocked" → error modal
     if (!emailMode && v.replace(/\D/g, '').includes('000')) { onContinue({ blocked: true, country, val, emailMode }); return; }
     onContinue({ blocked: false, country, val, emailMode });
@@ -116,7 +117,7 @@ function EntryStep({ data, set, onContinue, onSocial, onQR }) {
   const divider = (
     <div style={{ display: 'flex', alignItems: 'center', gap: 14, margin: '22px 0' }}>
       <span style={{ flex: 1, height: 1, background: 'var(--border-1)' }} />
-      <span style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--fg-3)', fontWeight: 600 }}>or</span>
+      <span style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--fg-3)', fontWeight: 600 }}>{tr('or', 'ou')}</span>
       <span style={{ flex: 1, height: 1, background: 'var(--border-1)' }} />
     </div>
   );
@@ -128,27 +129,27 @@ function EntryStep({ data, set, onContinue, onSocial, onQR }) {
   );
   return (
     <div>
-      <h1 style={titleStyle}>What’s your mobile number or email?</h1>
+      <h1 style={titleStyle}>{tr('What’s your mobile number or email?', 'Quel est votre numéro de mobile ou e-mail ?')}</h1>
       <div style={{ marginTop: 28, display: 'flex', gap: 10 }}>
         {!emailMode && <CountrySelect value={country} onChange={setCountry} />}
         <input autoFocus value={val} onChange={e => { setVal(e.target.value); setErr(''); }} onKeyDown={e => e.key === 'Enter' && submit()}
-          placeholder="Enter mobile number or email"
+          placeholder={tr('Enter mobile number or email', 'Saisissez votre numéro de mobile ou e-mail')}
           style={softInput({ flex: 1, borderColor: err ? 'var(--error)' : 'transparent' })}
           onFocus={e => { if (!err) e.target.style.boxShadow = '0 0 0 3px rgba(10,10,10,0.06)'; }} onBlur={e => e.target.style.boxShadow = 'none'} />
       </div>
       {err && <p style={{ fontFamily: 'var(--font-text)', fontSize: 14, fontWeight: 600, color: 'var(--error)', margin: '10px 2px 0' }}>{err}</p>}
       <button onClick={submit} style={{ width: '100%', marginTop: 16, background: 'var(--tako-black)', color: '#fff', border: 'none', borderRadius: 12, padding: '16px', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 16, cursor: 'pointer', transition: 'filter .15s, transform .12s' }}
         onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.5)'} onMouseLeave={e => e.currentTarget.style.filter = 'none'}
-        onMouseDown={e => e.currentTarget.style.transform = 'scale(0.99)'} onMouseUp={e => e.currentTarget.style.transform = 'none'}>Continue</button>
+        onMouseDown={e => e.currentTarget.style.transform = 'scale(0.99)'} onMouseUp={e => e.currentTarget.style.transform = 'none'}>{tr('Continue', 'Continuer')}</button>
       {divider}
       <div style={{ display: 'grid', gap: 12 }}>
-        {socialBtn(<GoogleG />, 'Continue with Google', () => onSocial('Google'))}
-        {socialBtn(<AppleLogo size={20} color="var(--tako-black)" />, 'Continue with Apple', () => onSocial('Apple'))}
+        {socialBtn(<GoogleG />, tr('Continue with Google', 'Continuer avec Google'), () => onSocial('Google'))}
+        {socialBtn(<AppleLogo size={20} color="var(--tako-black)" />, tr('Continue with Apple', 'Continuer avec Apple'), () => onSocial('Apple'))}
       </div>
       {divider}
-      {socialBtn(<SIcon name="qr-code" size={20} />, 'Log in with QR code', onQR)}
+      {socialBtn(<SIcon name="qr-code" size={20} />, tr('Log in with QR code', 'Se connecter avec un QR code'), onQR)}
       <p style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-3)', lineHeight: 1.5, margin: '24px 0 0' }}>
-        By continuing, you agree to receive calls, WhatsApp or SMS messages from Tako, including by automated means. Reply STOP to opt out.
+        {tr('By continuing, you agree to receive calls, WhatsApp or SMS messages from Tako, including by automated means. Reply STOP to opt out.', 'En continuant, vous acceptez de recevoir des appels, des messages WhatsApp ou SMS de Tako, y compris par des moyens automatisés. Répondez STOP pour vous désinscrire.')}
       </p>
     </div>
   );
@@ -158,17 +159,17 @@ function EntryStep({ data, set, onContinue, onSocial, onQR }) {
 function QRPanel({ onBack }) {
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1 style={titleStyle}>Log in with QR code</h1>
-      <p style={subStyle}>Open the Tako app, go to <strong>Account → Log in on web</strong>, and scan this code.</p>
+      <h1 style={titleStyle}>{tr('Log in with QR code', 'Se connecter avec un QR code')}</h1>
+      <p style={subStyle}>{tr('Open the Tako app, go to', 'Ouvrez l’app Tako, allez dans')} <strong>{tr('Account → Log in on web', 'Compte → Se connecter sur le web')}</strong>{tr(', and scan this code.', ', et scannez ce code.')}</p>
       <div style={{ display: 'inline-block', marginTop: 28, padding: 18, background: '#fff', border: '1px solid var(--border-1)', borderRadius: 20, boxShadow: 'var(--shadow-md)' }}>
         <QRCode value="tako-web-login-237" size={220} />
       </div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 20, color: 'var(--fg-2)' }}>
         <span style={{ width: 8, height: 8, borderRadius: 999, background: 'var(--tako-amber)' }} className="pulse" />
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13 }}>Waiting for scan…</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13 }}>{tr('Waiting for scan…', 'En attente du scan…')}</span>
       </div>
       <button onClick={onBack} style={{ marginTop: 28, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 15, color: 'var(--tako-black)', display: 'inline-flex', alignItems: 'center', gap: 8 }} className="link-amber">
-        <SIcon name="arrow-left" size={18} /> Use phone or email instead
+        <SIcon name="arrow-left" size={18} /> {tr('Use phone or email instead', 'Utiliser plutôt le téléphone ou l’e-mail')}
       </button>
     </div>
   );
@@ -204,8 +205,8 @@ function OtpStep({ data, onBack, onNext }) {
   const submit = () => { if (!full) return; if (code === '0000') { setErr(true); return; } onNext(); };
   return (
     <div>
-      <h1 style={titleStyle}>Enter the 4-digit code</h1>
-      <p style={subStyle}>Sent to you at <strong style={{ color: 'var(--tako-black)' }}>{data.contact}</strong></p>
+      <h1 style={titleStyle}>{tr('Enter the 4-digit code', 'Saisissez le code à 4 chiffres')}</h1>
+      <p style={subStyle}>{tr('Sent to you at', 'Envoyé à')} <strong style={{ color: 'var(--tako-black)' }}>{data.contact}</strong></p>
       <div style={{ display: 'flex', gap: 14, marginTop: 28 }} onPaste={onPaste}>
         {digits.map((d, i) => (
           <input key={i} ref={el => refs.current[i] = el} value={d} onChange={e => setAt(i, e.target.value)} onKeyDown={e => onKey(i, e)}
@@ -216,12 +217,12 @@ function OtpStep({ data, onBack, onNext }) {
             onBlur={e => { if (!err && !e.target.value) e.target.style.borderColor = 'var(--border-1)'; }} />
         ))}
       </div>
-      {err && <p style={{ fontFamily: 'var(--font-text)', fontSize: 14, fontWeight: 600, color: 'var(--error)', margin: '12px 2px 0' }}>The code you entered is incorrect.</p>}
-      <p style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-3)', margin: '14px 2px 0' }}>Tip: check your inbox and spam folders. (Demo: any 4 digits work; 0000 shows an error.)</p>
+      {err && <p style={{ fontFamily: 'var(--font-text)', fontSize: 14, fontWeight: 600, color: 'var(--error)', margin: '12px 2px 0' }}>{tr('The code you entered is incorrect.', 'Le code saisi est incorrect.')}</p>}
+      <p style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-3)', margin: '14px 2px 0' }}>{tr('Tip: check your inbox and spam folders. (Demo: any 4 digits work; 0000 shows an error.)', 'Astuce : vérifiez votre boîte de réception et vos spams. (Démo : n’importe quels 4 chiffres fonctionnent ; 0000 affiche une erreur.)')}</p>
       <div style={{ marginTop: 22 }}>
         <button onClick={() => { if (cooldown === 0) setCooldown(30); }} disabled={cooldown > 0}
           style={{ background: 'var(--bg-3)', border: 'none', borderRadius: 999, padding: '10px 18px', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 14, color: cooldown > 0 ? 'var(--fg-3)' : 'var(--tako-black)', cursor: cooldown > 0 ? 'default' : 'pointer' }}>
-          {cooldown > 0 ? `Resend in ${cooldown}s` : 'Resend code'}
+          {cooldown > 0 ? `${tr('Resend in', 'Renvoyer dans')} ${cooldown}s` : tr('Resend code', 'Renvoyer le code')}
         </button>
       </div>
       <NavButtons onBack={onBack} onNext={submit} nextDisabled={!full} />
@@ -237,16 +238,16 @@ function NameStep({ data, set, onBack, onNext }) {
   const go = () => { if (!ok) return; set({ first: first.trim(), last: last.trim() }); onNext(); };
   return (
     <div>
-      <h1 style={titleStyle}>What’s your name?</h1>
-      <p style={subStyle}>Let us know how to address you.</p>
+      <h1 style={titleStyle}>{tr('What’s your name?', 'Quel est votre nom ?')}</h1>
+      <p style={subStyle}>{tr('Let us know how to address you.', 'Dites-nous comment vous appeler.')}</p>
       <div style={{ marginTop: 28 }}>
-        <label style={fieldLabel}>First name</label>
-        <input autoFocus value={first} onChange={e => setFirst(e.target.value)} placeholder="Enter first name" style={softInput()}
+        <label style={fieldLabel}>{tr('First name', 'Prénom')}</label>
+        <input autoFocus value={first} onChange={e => setFirst(e.target.value)} placeholder={tr('Enter first name', 'Saisissez votre prénom')} style={softInput()}
           onFocus={e => e.target.style.boxShadow = '0 0 0 3px rgba(10,10,10,0.06)'} onBlur={e => e.target.style.boxShadow = 'none'} />
       </div>
       <div style={{ marginTop: 18 }}>
-        <label style={fieldLabel}>Last name</label>
-        <input value={last} onChange={e => setLast(e.target.value)} onKeyDown={e => e.key === 'Enter' && go()} placeholder="Enter last name" style={softInput()}
+        <label style={fieldLabel}>{tr('Last name', 'Nom')}</label>
+        <input value={last} onChange={e => setLast(e.target.value)} onKeyDown={e => e.key === 'Enter' && go()} placeholder={tr('Enter last name', 'Saisissez votre nom')} style={softInput()}
           onFocus={e => e.target.style.boxShadow = '0 0 0 3px rgba(10,10,10,0.06)'} onBlur={e => e.target.style.boxShadow = 'none'} />
       </div>
       <NavButtons onBack={onBack} onNext={go} nextDisabled={!ok} />
@@ -261,15 +262,15 @@ function MobileStep({ data, set, onBack, onNext }) {
   const save = () => { set({ mobile: num.trim() ? country.dial + ' ' + num.trim() : '' }); onNext(); };
   return (
     <div>
-      <h1 style={titleStyle}>Add your mobile number <span style={{ color: 'var(--fg-3)', fontWeight: 700 }}>(optional)</span></h1>
-      <p style={subStyle}>A mobile number helps with account recovery and ride updates.</p>
-      <label style={{ ...fieldLabel, marginTop: 28 }}>Mobile</label>
+      <h1 style={titleStyle}>{tr('Add your mobile number', 'Ajoutez votre numéro de mobile')} <span style={{ color: 'var(--fg-3)', fontWeight: 700 }}>{tr('(optional)', '(facultatif)')}</span></h1>
+      <p style={subStyle}>{tr('A mobile number helps with account recovery and ride updates.', 'Un numéro de mobile facilite la récupération du compte et le suivi des courses.')}</p>
+      <label style={{ ...fieldLabel, marginTop: 28 }}>{tr('Mobile', 'Mobile')}</label>
       <div style={{ display: 'flex', gap: 10 }}>
         <CountrySelect value={country} onChange={setCountry} />
         <input autoFocus value={num} onChange={e => setNum(e.target.value)} onKeyDown={e => e.key === 'Enter' && save()} placeholder="6 71 23 45 67" style={softInput({ flex: 1 })}
           onFocus={e => e.target.style.boxShadow = '0 0 0 3px rgba(10,10,10,0.06)'} onBlur={e => e.target.style.boxShadow = 'none'} />
       </div>
-      <button onClick={save} style={{ marginTop: 22, background: 'var(--bg-3)', border: 'none', borderRadius: 999, padding: '10px 20px', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 14, color: 'var(--tako-black)', cursor: 'pointer' }}>Skip for now</button>
+      <button onClick={save} style={{ marginTop: 22, background: 'var(--bg-3)', border: 'none', borderRadius: 999, padding: '10px 20px', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 14, color: 'var(--tako-black)', cursor: 'pointer' }}>{tr('Skip for now', 'Passer pour l’instant')}</button>
       <NavButtons onBack={onBack} onNext={save} nextLabel="Next" />
     </div>
   );
@@ -280,13 +281,13 @@ function TermsStep({ data, set, onBack, onNext }) {
   const [agree, setAgree] = React.useState(!!data.agree);
   return (
     <div>
-      <h1 style={titleStyle}>Accept Tako’s Terms &amp; review Privacy Notice</h1>
+      <h1 style={titleStyle}>{tr('Accept Tako’s Terms & review Privacy Notice', 'Acceptez les Conditions de Tako et consultez l’Avis de confidentialité')}</h1>
       <p style={subStyle}>
-        By selecting “I agree” below, I have reviewed and agree to the <a href="terms.html" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>Terms of Use</a> and acknowledge the <a href="privacy.html" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>Privacy Notice</a>. I am at least 18 years of age.
+        {tr('By selecting “I agree” below, I have reviewed and agree to the', 'En sélectionnant « J’accepte » ci-dessous, j’ai lu et j’accepte les')} <a href="terms.html" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>{tr('Terms of Use', 'Conditions d’utilisation')}</a> {tr('and acknowledge the', 'et je reconnais l’')} <a href="privacy.html" className="link-amber" style={{ color: 'var(--tako-amber-deep)' }}>{tr('Privacy Notice', 'Avis de confidentialité')}</a>. {tr('I am at least 18 years of age.', 'J’ai au moins 18 ans.')}
       </p>
       <div style={{ height: 1, background: 'var(--border-1)', margin: '32px 0 24px' }} />
       <button onClick={() => { setAgree(a => !a); set({ agree: !agree }); }} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18, color: 'var(--tako-black)' }}>I agree</span>
+        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18, color: 'var(--tako-black)' }}>{tr('I agree', 'J’accepte')}</span>
         <span style={{ width: 28, height: 28, borderRadius: 7, border: `2px solid ${agree ? 'var(--tako-black)' : 'var(--border-strong)'}`, background: agree ? 'var(--tako-black)' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all .15s' }}>
           {agree && <SIcon name="check" size={18} color="#fff" />}
         </span>
@@ -310,8 +311,8 @@ function DoneStep({ data }) {
           <SIcon name="check" size={30} color="var(--tako-black)" />
         </div>
       </div>
-      <h1 style={titleStyle}>Welcome to Tako, {data.first || 'rider'}!</h1>
-      <p style={subStyle}>Your account is ready. Taking you to your home screen…</p>
+      <h1 style={titleStyle}>{tr('Welcome to Tako,', 'Bienvenue chez Tako,')} {data.first || tr('rider', 'passager')} !</h1>
+      <p style={subStyle}>{tr('Your account is ready. Taking you to your home screen…', 'Votre compte est prêt. Redirection vers votre accueil…')}</p>
     </div>
   );
 }
@@ -326,12 +327,12 @@ function ErrorModal({ onClose }) {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(10,10,10,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, animation: 'float-up .2s cubic-bezier(.2,0,0,1)' }} onClick={onClose}>
       <div onClick={e => e.stopPropagation()} style={{ background: '#fff', borderRadius: 20, padding: 36, maxWidth: 460, width: '100%', boxShadow: 'var(--shadow-xl)' }}>
-        <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 24, letterSpacing: '-0.01em', margin: '0 0 12px', color: 'var(--tako-black)' }}>Unable to create account</h2>
-        <p style={{ fontFamily: 'var(--font-text)', fontSize: 16, color: 'var(--fg-2)', lineHeight: 1.5, margin: 0 }}>The number you entered is blocked. Choose another option to continue.</p>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 24, letterSpacing: '-0.01em', margin: '0 0 12px', color: 'var(--tako-black)' }}>{tr('Unable to create account', 'Impossible de créer le compte')}</h2>
+        <p style={{ fontFamily: 'var(--font-text)', fontSize: 16, color: 'var(--fg-2)', lineHeight: 1.5, margin: 0 }}>{tr('The number you entered is blocked. Choose another option to continue.', 'Le numéro saisi est bloqué. Choisissez une autre option pour continuer.')}</p>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-3)', margin: '20px 0 4px' }}>Trace ID: {trace}</p>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-3)', margin: 0 }}>{now}</p>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 28 }}>
-          <SBtn variant="primary" onClick={onClose}>Choose another option</SBtn>
+          <SBtn variant="primary" onClick={onClose}>{tr('Choose another option', 'Choisir une autre option')}</SBtn>
         </div>
       </div>
     </div>

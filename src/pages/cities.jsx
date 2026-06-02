@@ -1,4 +1,5 @@
 /* Tako — Cities page */
+import { t as tr } from '../lib/i18n.js';
 
 const CITIES = [
   { name: 'Douala', region: 'Littoral', status: 'live', drivers: '3,200+', since: '2023', routes: ['Akwa ↔ Bonabéri', 'Airport ↔ Bonapriso', 'Deido ↔ Akwa'], x: 18, y: 64 },
@@ -40,8 +41,8 @@ function MapPanel({ active, onPick }) {
         );
       })}
       <div style={{ position: 'absolute', bottom: 16, left: 16, display: 'flex', gap: 16, fontFamily: 'var(--font-text)', fontSize: 12, fontWeight: 600, color: 'var(--gray-300)' }}>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}><span style={{ width: 10, height: 10, borderRadius: 999, background: 'var(--tako-amber)', border: '1.5px solid #fff' }} /> Live</span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}><span style={{ width: 10, height: 10, borderRadius: 999, border: '1.5px dashed var(--gray-500)' }} /> Coming soon</span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}><span style={{ width: 10, height: 10, borderRadius: 999, background: 'var(--tako-amber)', border: '1.5px solid #fff' }} /> {tr('Live', 'En service')}</span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}><span style={{ width: 10, height: 10, borderRadius: 999, border: '1.5px dashed var(--gray-500)' }} /> {tr('Coming soon', 'Bientôt')}</span>
       </div>
     </div>
   );
@@ -59,27 +60,27 @@ function CityExplorer() {
             <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 30, letterSpacing: '-0.02em', margin: 0 }}>{city.name}</h3>
             <span style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.06em', padding: '6px 12px', borderRadius: 999, whiteSpace: 'nowrap', flexShrink: 0,
               background: city.status === 'live' ? 'var(--success-bg)' : 'var(--warning-bg)', color: city.status === 'live' ? 'var(--success)' : 'var(--tako-amber-deep)' }}>
-              {city.status === 'live' ? '● Live' : 'Coming soon'}
+              {city.status === 'live' ? tr('● Live', '● En service') : tr('Coming soon', 'Bientôt')}
             </span>
           </div>
-          <div style={{ fontFamily: 'var(--font-text)', fontSize: 15, color: 'var(--fg-3)', fontWeight: 600, marginBottom: 24 }}>{city.region} Region</div>
+          <div style={{ fontFamily: 'var(--font-text)', fontSize: 15, color: 'var(--fg-3)', fontWeight: 600, marginBottom: 24 }}>{tr('Region', 'Région')} {city.region}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 24 }}>
             <div style={{ background: 'var(--bg-2)', borderRadius: 14, padding: '16px 18px' }}>
               <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 24 }}>{city.drivers}</div>
-              <div style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-2)', fontWeight: 600 }}>drivers nearby</div>
+              <div style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-2)', fontWeight: 600 }}>{tr('drivers nearby', 'chauffeurs à proximité')}</div>
             </div>
             <div style={{ background: 'var(--bg-2)', borderRadius: 14, padding: '16px 18px' }}>
               <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 24 }}>{city.since}</div>
-              <div style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-2)', fontWeight: 600 }}>{city.status === 'live' ? 'serving since' : 'launching' }</div>
+              <div style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-2)', fontWeight: 600 }}>{city.status === 'live' ? tr('serving since', 'actif depuis') : tr('launching', 'lancement') }</div>
             </div>
           </div>
-          <div style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--fg-3)', marginBottom: 12 }}>Popular routes</div>
+          <div style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--fg-3)', marginBottom: 12 }}>{tr('Popular routes', 'Trajets populaires')}</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
             {city.routes.map(r => <span key={r} style={{ fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 13, background: 'var(--bg-3)', borderRadius: 999, padding: '7px 14px' }}>{r}</span>)}
           </div>
           <SBtn variant={city.status === 'live' ? 'primary' : 'outline'} icon="arrow-right" style={{ width: '100%' }}
             href={city.status === 'live' ? 'auth.html' : '#request-city'}>
-            {city.status === 'live' ? `Request a ride in ${city.name}` : `Notify me when ${city.name} is live`}
+            {city.status === 'live' ? `${tr('Request a ride in', 'Réserver une course à')} ${city.name}` : `${tr('Notify me when', 'Me prévenir au lancement à')} ${city.name}${tr(' is live', '')}`}
           </SBtn>
         </div>
       </div>
@@ -91,12 +92,12 @@ function CitiesHero() {
   return (
     <section style={{ background: 'var(--bg-2)', borderBottom: '1px solid var(--border-1)' }}>
       <div style={{ ...WRAP, paddingTop: 72, paddingBottom: 56 }} className="stack-pad">
-        <div className="tako-overline" style={{ color: 'var(--tako-amber-deep)', marginBottom: 18 }}>Coverage</div>
+        <div className="tako-overline" style={{ color: 'var(--tako-amber-deep)', marginBottom: 18 }}>{tr('Coverage', 'Couverture')}</div>
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(40px,5vw,64px)', lineHeight: 1.0, letterSpacing: '-0.03em', margin: 0, maxWidth: 760 }}>
-          Now moving across Cameroon.
+          {tr('Now moving across Cameroon.', 'Désormais partout au Cameroun.')}
         </h1>
         <p style={{ fontFamily: 'var(--font-text)', fontSize: 19, lineHeight: 1.55, color: 'var(--fg-2)', margin: '20px 0 0', maxWidth: 560 }}>
-          Eleven cities live and growing — from the coast at Limbe to Maroua in the far north. Tap a pin to explore.
+          {tr('Eleven cities live and growing — from the coast at Limbe to Maroua in the far north. Tap a pin to explore.', 'Onze villes en service, et ça continue — de la côte à Limbe à Maroua dans l’extrême nord. Touchez un point pour explorer.')}
         </p>
       </div>
     </section>
@@ -107,7 +108,7 @@ function AllCities() {
   return (
     <section style={{ background: 'var(--bg-2)', paddingTop: 96, paddingBottom: 96 }}>
       <div style={WRAP} className="stack-pad">
-        <SectionHead over="Every city" title="The full Tako map" />
+        <SectionHead over={tr('Every city', 'Chaque ville')} title={tr('The full Tako map', 'La carte complète de Tako')} />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12 }} className="grid-4">
           {CITIES.map((c, i) => (
             <Reveal key={c.name} delay={(i % 4) * 50} className="lift" style={{ background: '#fff', border: '1px solid var(--border-1)', borderRadius: 16, padding: '20px 22px' }}>
@@ -134,18 +135,18 @@ function RequestCity() {
       <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--tako-black)', borderRadius: 28, padding: '64px 56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32, flexWrap: 'wrap' }}>
         <LaneMotif style={{ opacity: 0.4 }} />
         <div style={{ position: 'relative', maxWidth: 480 }}>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(28px,3vw,40px)', letterSpacing: '-0.02em', color: '#fff', margin: '0 0 12px' }}>Don’t see your city?</h2>
-          <p style={{ fontFamily: 'var(--font-text)', fontSize: 18, color: 'var(--gray-300)', margin: 0 }}>Tell us where you want Tako next. Demand decides where we go.</p>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(28px,3vw,40px)', letterSpacing: '-0.02em', color: '#fff', margin: '0 0 12px' }}>{tr('Don’t see your city?', 'Votre ville n’y est pas ?')}</h2>
+          <p style={{ fontFamily: 'var(--font-text)', fontSize: 18, color: 'var(--gray-300)', margin: 0 }}>{tr('Tell us where you want Tako next. Demand decides where we go.', 'Dites-nous où vous voulez Tako ensuite. La demande décide de nos prochaines villes.')}</p>
         </div>
         {sent ? (
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 14, background: 'var(--success-bg)', color: 'var(--success)', borderRadius: 14, padding: '18px 22px', maxWidth: 360 }}>
             <div style={{ width: 44, height: 44, borderRadius: 999, background: 'var(--success)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><SIcon name="check" size={24} /></div>
-            <p style={{ fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 15, lineHeight: 1.45, margin: 0 }}>Thanks — we’ll let you know when Tako reaches {city.trim()}.</p>
+            <p style={{ fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 15, lineHeight: 1.45, margin: 0 }}>{tr('Thanks — we’ll let you know when Tako reaches', 'Merci — nous vous préviendrons dès que Tako arrive à')} {city.trim()}.</p>
           </div>
         ) : (
           <form onSubmit={submit} style={{ position: 'relative', display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <input className="t-input" placeholder="Your city" value={city} onChange={e => setCity(e.target.value)} style={{ width: 200, background: '#fff' }} />
-            <SBtn variant="amber" icon="arrow-right">Request Tako</SBtn>
+            <input className="t-input" placeholder={tr('Your city', 'Votre ville')} value={city} onChange={e => setCity(e.target.value)} style={{ width: 200, background: '#fff' }} />
+            <SBtn variant="amber" icon="arrow-right">{tr('Request Tako', 'Demander Tako')}</SBtn>
           </form>
         )}
       </div>
