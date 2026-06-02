@@ -161,11 +161,3 @@ input[type=range].t-range::-moz-range-thumb { width: 22px; height: 22px; border-
   .grid-4 { grid-template-columns: 1fr !important; }
   .hide-sm { display: none !important; }
 }
-
-/* ---- Google Website Translator: hide its injected banner / tooltip ---- */
-#google_translate_element { display: none !important; }
-.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate { display: none !important; }
-.skiptranslate iframe { visibility: hidden !important; height: 0 !important; border: 0 !important; }
-body { top: 0 !important; }
-#goog-gt-tt, .goog-te-balloon-frame, .goog-tooltip, .goog-tooltip:hover { display: none !important; }
-.goog-text-highlight { background: none !important; box-shadow: none !important; }

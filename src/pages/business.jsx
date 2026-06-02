@@ -1,4 +1,5 @@
 /* Tako — Business page */
+import { t as tr } from '../lib/i18n.js';
 
 function BizHero() {
   return (
@@ -7,14 +8,14 @@ function BizHero() {
         <div>
           <div className="tako-overline" style={{ color: 'var(--tako-amber-deep)', marginBottom: 18 }}>Tako Business</div>
           <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(40px,5vw,62px)', lineHeight: 1.0, letterSpacing: '-0.03em', margin: 0 }}>
-            Move your team.<br />Skip the paperwork.
+            {tr('Move your team.', 'Déplacez vos équipes.')}<br />{tr('Skip the paperwork.', 'Oubliez la paperasse.')}
           </h1>
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 19, lineHeight: 1.55, color: 'var(--fg-2)', margin: '24px 0 32px', maxWidth: 480 }}>
-            One account for all your company’s rides — centralized billing, simple controls, and rides your people can count on across Cameroon.
+            {tr('One account for all your company’s rides — centralized billing, simple controls, and rides your people can count on across Cameroon.', 'Un seul compte pour toutes les courses de votre entreprise — facturation centralisée, contrôles simples et des trajets fiables partout au Cameroun.')}
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <SBtn variant="primary" icon="arrow-right" href="#quote">Get a quote</SBtn>
-            <SBtn variant="outline" href="#how">How it works</SBtn>
+            <SBtn variant="primary" icon="arrow-right" href="#quote">{tr('Get a quote', 'Demander un devis')}</SBtn>
+            <SBtn variant="outline" href="#how">{tr('How it works', 'Comment ça marche')}</SBtn>
           </div>
         </div>
         <DashboardPreview />
@@ -25,20 +26,20 @@ function BizHero() {
 
 function DashboardPreview() {
   const rows = [
-    ['Aïcha B.', 'Bonapriso → Office', '2 400', 'Today'],
-    ['David M.', 'Airport → Bastos', '4 100', 'Today'],
-    ['Ngo Laure', 'Akwa → Deido', '1 800', 'Yesterday'],
-    ['Samuel E.', 'Office → Mvan', '2 950', 'Yesterday'],
+    ['Aïcha B.', tr('Bonapriso → Office', 'Bonapriso → Bureau'), '2 400', tr('Today', 'Aujourd’hui')],
+    ['David M.', tr('Airport → Bastos', 'Aéroport → Bastos'), '4 100', tr('Today', 'Aujourd’hui')],
+    ['Ngo Laure', 'Akwa → Deido', '1 800', tr('Yesterday', 'Hier')],
+    ['Samuel E.', tr('Office → Mvan', 'Bureau → Mvan'), '2 950', tr('Yesterday', 'Hier')],
   ];
   return (
     <div style={{ background: '#fff', border: '1px solid var(--border-1)', borderRadius: 24, boxShadow: 'var(--shadow-lg)', overflow: 'hidden' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '18px 22px', borderBottom: '1px solid var(--border-1)' }}>
         <img src="assets/tako-mark.png" alt="" style={{ width: 26, height: 26 }} />
-        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16 }}>Tako Business · Dashboard</span>
+        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16 }}>{tr('Tako Business · Dashboard', 'Tako Business · Tableau de bord')}</span>
         <span style={{ marginLeft: 'auto', display: 'flex', gap: 5 }}>{[0, 1, 2].map(i => <span key={i} style={{ width: 9, height: 9, borderRadius: 999, background: 'var(--gray-200)' }} />)}</span>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: 22 }}>
-        {[['This month', '184 trips', 'trending-up'], ['Spend', '486 200 FCFA', 'wallet'], ['Active riders', '23', 'users'], ['Avg fare', '2 640 FCFA', 'badge-cent']].map(([l, v, ic]) => (
+        {[[tr('This month', 'Ce mois-ci'), tr('184 trips', '184 courses'), 'trending-up'], [tr('Spend', 'Dépenses'), '486 200 FCFA', 'wallet'], [tr('Active riders', 'Voyageurs actifs'), '23', 'users'], [tr('Avg fare', 'Prix moyen'), '2 640 FCFA', 'badge-cent']].map(([l, v, ic]) => (
           <div key={l} style={{ background: 'var(--bg-2)', borderRadius: 14, padding: '14px 16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--fg-3)', marginBottom: 6 }}><SIcon name={ic} size={15} /><span style={{ fontFamily: 'var(--font-text)', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{l}</span></div>
             <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 20, letterSpacing: '-0.01em' }}>{v}</div>
@@ -46,7 +47,7 @@ function DashboardPreview() {
         ))}
       </div>
       <div style={{ padding: '0 22px 22px' }}>
-        <div style={{ fontFamily: 'var(--font-text)', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--fg-3)', marginBottom: 10 }}>Recent rides</div>
+        <div style={{ fontFamily: 'var(--font-text)', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--fg-3)', marginBottom: 10 }}>{tr('Recent rides', 'Courses récentes')}</div>
         <div style={{ display: 'grid', gap: 2 }}>
           {rows.map((r, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderTop: i ? '1px solid var(--border-1)' : 'none' }}>
@@ -69,16 +70,16 @@ function DashboardPreview() {
 
 function BizValues() {
   const feats = [
-    ['receipt', 'Centralized billing', 'One monthly invoice for every ride. No more chasing paper receipts or reimbursements.'],
-    ['sliders-horizontal', 'Ride policies', 'Set budgets, allowed hours, ride tiers and zones per team or per person.'],
-    ['chart-column', 'Spend insights', 'See who travelled where, when and for how much — exportable in a click.'],
-    ['shield-check', 'Team safety', 'Verified drivers, live trip sharing and 24/7 support on every company ride.'],
-    ['users-round', 'Easy to manage', 'Add or remove riders in seconds. They ride with the app they already know.'],
-    ['credit-card', 'Flexible payment', 'Pay by bank transfer or Mobile Money on terms that suit your finance team.'],
+    ['receipt', tr('Centralized billing', 'Facturation centralisée'), tr('One monthly invoice for every ride. No more chasing paper receipts or reimbursements.', 'Une seule facture mensuelle pour toutes les courses. Fini la chasse aux reçus papier et aux remboursements.')],
+    ['sliders-horizontal', tr('Ride policies', 'Règles de course'), tr('Set budgets, allowed hours, ride tiers and zones per team or per person.', 'Définissez budgets, horaires autorisés, catégories et zones par équipe ou par personne.')],
+    ['chart-column', tr('Spend insights', 'Analyse des dépenses'), tr('See who travelled where, when and for how much — exportable in a click.', 'Voyez qui s’est déplacé où, quand et pour combien — exportable en un clic.')],
+    ['shield-check', tr('Team safety', 'Sécurité des équipes'), tr('Verified drivers, live trip sharing and 24/7 support on every company ride.', 'Chauffeurs vérifiés, partage de trajet en direct et assistance 24/7 sur chaque course pro.')],
+    ['users-round', tr('Easy to manage', 'Facile à gérer'), tr('Add or remove riders in seconds. They ride with the app they already know.', 'Ajoutez ou retirez des voyageurs en quelques secondes. Ils utilisent l’app qu’ils connaissent déjà.')],
+    ['credit-card', tr('Flexible payment', 'Paiement flexible'), tr('Pay by bank transfer or Mobile Money on terms that suit your finance team.', 'Payez par virement bancaire ou Mobile Money, selon les conditions qui conviennent à votre service financier.')],
   ];
   return (
     <section style={{ ...WRAP, paddingTop: 96, paddingBottom: 96 }} className="stack-pad">
-      <SectionHead over="Why Tako Business" title="Company travel, finally simple" />
+      <SectionHead over={tr('Why Tako Business', 'Pourquoi Tako Business')} title={tr('Company travel, finally simple', 'Les déplacements pro, enfin simples')} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }} className="grid-3">
         {feats.map(([ic, t, d], i) => (
           <Reveal key={t} delay={(i % 3) * 70} style={{ border: '1px solid var(--border-1)', borderRadius: 18, padding: 26 }}>
@@ -94,15 +95,15 @@ function BizValues() {
 
 function UseCases() {
   const cases = [
-    ['briefcase', 'Employee travel', 'Commutes, meetings and late nights at the office, all on one account.'],
-    ['plane', 'Client & guest rides', 'Send a ride to a client or visitor without sharing a single phone number.'],
-    ['party-popper', 'Events & conferences', 'Move delegates and staff with ride codes that just work.'],
-    ['package', 'After-hours & shifts', 'Get your team home safely when public transport has stopped.'],
+    ['briefcase', tr('Employee travel', 'Déplacements des employés'), tr('Commutes, meetings and late nights at the office, all on one account.', 'Trajets domicile-travail, réunions et soirées tardives au bureau, le tout sur un seul compte.')],
+    ['plane', tr('Client & guest rides', 'Courses clients & invités'), tr('Send a ride to a client or visitor without sharing a single phone number.', 'Envoyez une course à un client ou un visiteur sans partager aucun numéro de téléphone.')],
+    ['party-popper', tr('Events & conferences', 'Événements & conférences'), tr('Move delegates and staff with ride codes that just work.', 'Déplacez délégués et personnel avec des codes de course qui fonctionnent simplement.')],
+    ['package', tr('After-hours & shifts', 'Horaires décalés & équipes'), tr('Get your team home safely when public transport has stopped.', 'Ramenez votre équipe en sécurité quand les transports en commun s’arrêtent.')],
   ];
   return (
     <section style={{ background: 'var(--bg-2)', paddingTop: 96, paddingBottom: 96 }}>
       <div style={WRAP} className="stack-pad">
-        <SectionHead over="Use cases" title="However your business moves" />
+        <SectionHead over={tr('Use cases', 'Cas d’usage')} title={tr('However your business moves', 'Quels que soient vos déplacements')} />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 20 }} className="grid-2">
           {cases.map(([ic, t, d], i) => (
             <Reveal key={t} delay={(i % 2) * 70} style={{ display: 'flex', gap: 20, background: '#fff', border: '1px solid var(--border-1)', borderRadius: 18, padding: 28 }}>
@@ -137,16 +138,16 @@ function QuoteForm() {
     <label style={{ display: 'block' }}>
       <span style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, marginBottom: 7 }}>{label}</span>
       <input className="t-input" value={data[k]} onChange={e => set(k, e.target.value)} style={errs[k] ? { borderColor: 'var(--error)' } : {}} {...props} />
-      {errs[k] && <span style={{ fontFamily: 'var(--font-text)', fontSize: 12, color: 'var(--error)', marginTop: 5, display: 'block' }}>Please check this field.</span>}
+      {errs[k] && <span style={{ fontFamily: 'var(--font-text)', fontSize: 12, color: 'var(--error)', marginTop: 5, display: 'block' }}>{tr('Please check this field.', 'Veuillez vérifier ce champ.')}</span>}
     </label>
   );
   return (
     <section id="quote" style={{ ...WRAP, paddingTop: 96, paddingBottom: 96 }} className="stack-pad">
       <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 56, alignItems: 'center' }} className="hero-grid">
         <div>
-          <SectionHead over="Get started" title="Let’s talk about your team" sub="Tell us a little about your company and we’ll set up an account and a quote that fits." style={{ marginBottom: 28 }} />
+          <SectionHead over={tr('Get started', 'Pour commencer')} title={tr('Let’s talk about your team', 'Parlons de votre équipe')} sub={tr('Tell us a little about your company and we’ll set up an account and a quote that fits.', 'Parlez-nous un peu de votre entreprise et nous créons un compte et un devis adaptés.')} style={{ marginBottom: 28 }} />
           <div style={{ display: 'grid', gap: 16 }}>
-            {[['phone', 'Talk to a person', 'Mon–Sat, 8am–8pm WAT'], ['mail', 'business@tako.cm', 'We reply within one business day']].map(([ic, a, b]) => (
+            {[['phone', tr('Talk to a person', 'Parler à une personne'), tr('Mon–Sat, 8am–8pm WAT', 'Lun–Sam, 8h–20h WAT')], ['mail', 'business@tako.cm', tr('We reply within one business day', 'Réponse sous un jour ouvré')]].map(([ic, a, b]) => (
               <div key={a} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, border: '1px solid var(--border-1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><SIcon name={ic} size={20} color="var(--tako-amber-deep)" /></div>
                 <div><div style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 16 }}>{a}</div><div style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--fg-3)' }}>{b}</div></div>
@@ -158,35 +159,35 @@ function QuoteForm() {
           {sent ? (
             <div style={{ textAlign: 'center', padding: '40px 12px' }}>
               <div style={{ width: 64, height: 64, borderRadius: 999, background: 'var(--success-bg)', color: 'var(--success)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}><SIcon name="check" size={32} /></div>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 24, margin: '0 0 10px' }}>Thanks, {data.company || 'team'}!</h3>
-              <p style={{ fontFamily: 'var(--font-text)', fontSize: 16, color: 'var(--fg-2)', margin: '0 0 24px' }}>Our business team will reach out to {data.email} within one business day.</p>
-              <SBtn variant="outline" onClick={() => { setSent(false); setData({ company: '', email: '', size: '', city: 'Douala', msg: '' }); }}>Send another</SBtn>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 24, margin: '0 0 10px' }}>{tr('Thanks,', 'Merci,')} {data.company || tr('team', 'équipe')}!</h3>
+              <p style={{ fontFamily: 'var(--font-text)', fontSize: 16, color: 'var(--fg-2)', margin: '0 0 24px' }}>{tr('Our business team will reach out to', 'Notre équipe entreprise vous contactera à')} {data.email} {tr('within one business day.', 'sous un jour ouvré.')}</p>
+              <SBtn variant="outline" onClick={() => { setSent(false); setData({ company: '', email: '', size: '', city: 'Douala', msg: '' }); }}>{tr('Send another', 'Envoyer un autre')}</SBtn>
             </div>
           ) : (
             <form onSubmit={submit} style={{ display: 'grid', gap: 18 }}>
-              {field('company', 'Company name', { placeholder: 'Acme Cameroun SARL' })}
-              {field('email', 'Work email', { placeholder: 'you@company.cm', type: 'email' })}
+              {field('company', tr('Company name', 'Nom de l’entreprise'), { placeholder: 'Acme Cameroun SARL' })}
+              {field('email', tr('Work email', 'E-mail professionnel'), { placeholder: tr('you@company.cm', 'vous@entreprise.cm'), type: 'email' })}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <label style={{ display: 'block' }}>
-                  <span style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, marginBottom: 7 }}>Team size</span>
+                  <span style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, marginBottom: 7 }}>{tr('Team size', 'Taille de l’équipe')}</span>
                   <select className="t-input" value={data.size} onChange={e => set('size', e.target.value)} style={errs.size ? { borderColor: 'var(--error)' } : {}}>
-                    <option value="">Select…</option>
+                    <option value="">{tr('Select…', 'Choisir…')}</option>
                     <option>1–10</option><option>11–50</option><option>51–200</option><option>200+</option>
                   </select>
-                  {errs.size && <span style={{ fontFamily: 'var(--font-text)', fontSize: 12, color: 'var(--error)', marginTop: 5, display: 'block' }}>Please choose one.</span>}
+                  {errs.size && <span style={{ fontFamily: 'var(--font-text)', fontSize: 12, color: 'var(--error)', marginTop: 5, display: 'block' }}>{tr('Please choose one.', 'Veuillez en choisir une.')}</span>}
                 </label>
                 <label style={{ display: 'block' }}>
-                  <span style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, marginBottom: 7 }}>Main city</span>
+                  <span style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, marginBottom: 7 }}>{tr('Main city', 'Ville principale')}</span>
                   <select className="t-input" value={data.city} onChange={e => set('city', e.target.value)}>
-                    <option>Douala</option><option>Yaoundé</option><option>Bafoussam</option><option>Bamenda</option><option>Buea</option><option>Other</option>
+                    <option>Douala</option><option>Yaoundé</option><option>Bafoussam</option><option>Bamenda</option><option>Buea</option><option>{tr('Other', 'Autre')}</option>
                   </select>
                 </label>
               </div>
               <label style={{ display: 'block' }}>
-                <span style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, marginBottom: 7 }}>Anything else? <span style={{ color: 'var(--fg-3)', fontWeight: 500 }}>(optional)</span></span>
-                <textarea className="t-input" value={data.msg} onChange={e => set('msg', e.target.value)} rows="3" placeholder="How can Tako help your team move?" style={{ resize: 'vertical' }} />
+                <span style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, marginBottom: 7 }}>{tr('Anything else?', 'Autre chose ?')} <span style={{ color: 'var(--fg-3)', fontWeight: 500 }}>{tr('(optional)', '(facultatif)')}</span></span>
+                <textarea className="t-input" value={data.msg} onChange={e => set('msg', e.target.value)} rows="3" placeholder={tr('How can Tako help your team move?', 'Comment Tako peut-il aider votre équipe à se déplacer ?')} style={{ resize: 'vertical' }} />
               </label>
-              <SBtn variant="primary" icon="arrow-right" style={{ width: '100%' }}>Request a quote</SBtn>
+              <SBtn variant="primary" icon="arrow-right" style={{ width: '100%' }}>{tr('Request a quote', 'Demander un devis')}</SBtn>
             </form>
           )}
         </div>

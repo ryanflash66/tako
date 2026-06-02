@@ -1,28 +1,29 @@
 /* Tako — Help page */
+import { t as tr } from '../lib/i18n.js';
 
 const FAQS = [
-  { c: 'Rides', q: 'How do I request a ride?', a: 'Open the Tako app, enter your destination, choose a ride option (Moto, Go, Comfort or XL) and tap Request. We’ll match you with the nearest driver and show your fare before you confirm.' },
-  { c: 'Rides', q: 'Can I schedule a ride in advance?', a: 'Yes. When setting your destination, tap the clock icon to pick a date and time. We’ll have a driver ready for your scheduled pickup.' },
-  { c: 'Rides', q: 'How do I add a stop to my trip?', a: 'Before or during your ride, tap “Add stop” and enter the address. Your fare updates automatically to include the extra stop.' },
-  { c: 'Payments', q: 'What payment methods can I use?', a: 'You can pay with cash or Mobile Money (MTN Mobile Money and Orange Money). Choose your default in Payment settings, and switch per trip whenever you like.' },
-  { c: 'Payments', q: 'Why is the final fare different from the estimate?', a: 'Fares are confirmed before you book and rarely change. If your route changes — extra stops, a longer path, heavy traffic — the fare adjusts and you’ll always see why in your receipt.' },
-  { c: 'Payments', q: 'How do I get a receipt?', a: 'Every trip receipt is saved under Your Trips in the app and emailed to you automatically. Tap any past trip to view or re-send it.' },
-  { c: 'Account', q: 'How do I create a Tako account?', a: 'Download the Tako app, enter your phone number, and verify it with the code we text you. Add your name and you’re ready to ride.' },
-  { c: 'Account', q: 'I changed my phone number. What now?', a: 'Go to Settings → Account → Phone number to update it. We’ll verify the new number with a code to keep your account secure.' },
-  { c: 'Safety', q: 'How do I share my trip with someone?', a: 'During any ride, tap “Share trip”. Your contact gets a live link with your route, driver details and ETA until you arrive.' },
-  { c: 'Safety', q: 'What is the emergency button?', a: 'Tap the shield icon during a ride to reach local emergency response. Tako shares your live location and trip details so help can find you fast.' },
-  { c: 'Driving', q: 'How do I become a Tako driver?', a: 'Visit the Drive page and sign up online with your licence, ID and vehicle documents. Most drivers are verified within a couple of days.' },
-  { c: 'Driving', q: 'When and how do I get paid?', a: 'Driver earnings are paid out every week via Mobile Money. You can track your balance and trip history any time in the driver app.' },
-  { c: 'Business', q: 'How does Tako Business billing work?', a: 'Your company gets one monthly invoice for all rides, payable by bank transfer or Mobile Money. Admins can see every trip and export reports from the dashboard.' },
+  { c: tr('Rides', 'Courses'), q: tr('How do I request a ride?', 'Comment réserver une course ?'), a: tr('Open the Tako app, enter your destination, choose a ride option (Moto, Go, Comfort or XL) and tap Request. We’ll match you with the nearest driver and show your fare before you confirm.', 'Ouvrez l’app Tako, saisissez votre destination, choisissez une option (Moto, Go, Comfort ou XL) et appuyez sur Réserver. Nous vous associons au chauffeur le plus proche et affichons votre prix avant la confirmation.') },
+  { c: tr('Rides', 'Courses'), q: tr('Can I schedule a ride in advance?', 'Puis-je réserver une course à l’avance ?'), a: tr('Yes. When setting your destination, tap the clock icon to pick a date and time. We’ll have a driver ready for your scheduled pickup.', 'Oui. Au moment de définir votre destination, appuyez sur l’icône horloge pour choisir une date et une heure. Un chauffeur sera prêt pour votre prise en charge programmée.') },
+  { c: tr('Rides', 'Courses'), q: tr('How do I add a stop to my trip?', 'Comment ajouter un arrêt à mon trajet ?'), a: tr('Before or during your ride, tap “Add stop” and enter the address. Your fare updates automatically to include the extra stop.', 'Avant ou pendant votre course, appuyez sur « Ajouter un arrêt » et saisissez l’adresse. Votre prix est mis à jour automatiquement pour inclure l’arrêt supplémentaire.') },
+  { c: tr('Payments', 'Paiements'), q: tr('What payment methods can I use?', 'Quels moyens de paiement puis-je utiliser ?'), a: tr('You can pay with cash or Mobile Money (MTN Mobile Money and Orange Money). Choose your default in Payment settings, and switch per trip whenever you like.', 'Vous pouvez payer en espèces ou par Mobile Money (MTN Mobile Money et Orange Money). Choisissez votre moyen par défaut dans les paramètres de paiement et changez à chaque trajet si vous le souhaitez.') },
+  { c: tr('Payments', 'Paiements'), q: tr('Why is the final fare different from the estimate?', 'Pourquoi le prix final diffère-t-il de l’estimation ?'), a: tr('Fares are confirmed before you book and rarely change. If your route changes — extra stops, a longer path, heavy traffic — the fare adjusts and you’ll always see why in your receipt.', 'Les prix sont confirmés avant la réservation et changent rarement. Si votre itinéraire change — arrêts supplémentaires, trajet plus long, trafic dense — le prix s’ajuste et vous en voyez toujours la raison sur votre reçu.') },
+  { c: tr('Payments', 'Paiements'), q: tr('How do I get a receipt?', 'Comment obtenir un reçu ?'), a: tr('Every trip receipt is saved under Your Trips in the app and emailed to you automatically. Tap any past trip to view or re-send it.', 'Chaque reçu de trajet est enregistré dans « Vos trajets » dans l’app et vous est envoyé par e-mail automatiquement. Appuyez sur un trajet passé pour le consulter ou le renvoyer.') },
+  { c: tr('Account', 'Compte'), q: tr('How do I create a Tako account?', 'Comment créer un compte Tako ?'), a: tr('Download the Tako app, enter your phone number, and verify it with the code we text you. Add your name and you’re ready to ride.', 'Téléchargez l’app Tako, saisissez votre numéro de téléphone et validez-le avec le code que nous vous envoyons par SMS. Ajoutez votre nom et vous êtes prêt à rouler.') },
+  { c: tr('Account', 'Compte'), q: tr('I changed my phone number. What now?', 'J’ai changé de numéro. Que faire ?'), a: tr('Go to Settings → Account → Phone number to update it. We’ll verify the new number with a code to keep your account secure.', 'Allez dans Paramètres → Compte → Numéro de téléphone pour le mettre à jour. Nous vérifierons le nouveau numéro avec un code pour sécuriser votre compte.') },
+  { c: tr('Safety', 'Sécurité'), q: tr('How do I share my trip with someone?', 'Comment partager mon trajet avec quelqu’un ?'), a: tr('During any ride, tap “Share trip”. Your contact gets a live link with your route, driver details and ETA until you arrive.', 'Pendant une course, appuyez sur « Partager le trajet ». Votre contact reçoit un lien en direct avec votre itinéraire, les détails du chauffeur et l’heure d’arrivée jusqu’à destination.') },
+  { c: tr('Safety', 'Sécurité'), q: tr('What is the emergency button?', 'Qu’est-ce que le bouton d’urgence ?'), a: tr('Tap the shield icon during a ride to reach local emergency response. Tako shares your live location and trip details so help can find you fast.', 'Appuyez sur l’icône bouclier pendant une course pour joindre les secours locaux. Tako partage votre position en direct et les détails du trajet pour que l’aide vous trouve vite.') },
+  { c: tr('Driving', 'Conduite'), q: tr('How do I become a Tako driver?', 'Comment devenir chauffeur Tako ?'), a: tr('Visit the Drive page and sign up online with your licence, ID and vehicle documents. Most drivers are verified within a couple of days.', 'Rendez-vous sur la page Conduire et inscrivez-vous en ligne avec votre permis, votre pièce d’identité et les documents du véhicule. La plupart des chauffeurs sont vérifiés en quelques jours.') },
+  { c: tr('Driving', 'Conduite'), q: tr('When and how do I get paid?', 'Quand et comment suis-je payé ?'), a: tr('Driver earnings are paid out every week via Mobile Money. You can track your balance and trip history any time in the driver app.', 'Les revenus des chauffeurs sont versés chaque semaine par Mobile Money. Vous pouvez suivre votre solde et votre historique à tout moment dans l’app chauffeur.') },
+  { c: tr('Business', 'Entreprise'), q: tr('How does Tako Business billing work?', 'Comment fonctionne la facturation Tako Business ?'), a: tr('Your company gets one monthly invoice for all rides, payable by bank transfer or Mobile Money. Admins can see every trip and export reports from the dashboard.', 'Votre entreprise reçoit une seule facture mensuelle pour toutes les courses, payable par virement bancaire ou Mobile Money. Les administrateurs voient chaque trajet et exportent des rapports depuis le tableau de bord.') },
 ];
 
 const HELP_CATS = [
-  ['user-round', 'Account', 'Sign up, profile and settings'],
-  ['credit-card', 'Payments', 'Fares, receipts and Mobile Money'],
-  ['car', 'Rides', 'Booking, options and trips'],
-  ['shield-check', 'Safety', 'Sharing trips and emergencies'],
-  ['steering-wheel', 'Driving', 'Becoming a driver and payouts'],
-  ['briefcase', 'Business', 'Company accounts and billing'],
+  ['user-round', tr('Account', 'Compte'), tr('Sign up, profile and settings', 'Inscription, profil et paramètres')],
+  ['credit-card', tr('Payments', 'Paiements'), tr('Fares, receipts and Mobile Money', 'Prix, reçus et Mobile Money')],
+  ['car', tr('Rides', 'Courses'), tr('Booking, options and trips', 'Réservation, options et trajets')],
+  ['shield-check', tr('Safety', 'Sécurité'), tr('Sharing trips and emergencies', 'Partage de trajets et urgences')],
+  ['steering-wheel', tr('Driving', 'Conduite'), tr('Becoming a driver and payouts', 'Devenir chauffeur et paiements')],
+  ['briefcase', tr('Business', 'Entreprise'), tr('Company accounts and billing', 'Comptes entreprise et facturation')],
 ];
 
 function HelpHero({ query, setQuery }) {
@@ -30,13 +31,13 @@ function HelpHero({ query, setQuery }) {
     <section style={{ background: 'var(--tako-black)', color: '#fff', position: 'relative', overflow: 'hidden' }}>
       <LaneMotif style={{ opacity: 0.35 }} />
       <div style={{ ...WRAP, position: 'relative', paddingTop: 80, paddingBottom: 80, maxWidth: 800, textAlign: 'center', marginInline: 'auto' }} className="stack-pad">
-        <div className="tako-overline" style={{ color: 'var(--tako-amber)', marginBottom: 18 }}>Help Centre</div>
+        <div className="tako-overline" style={{ color: 'var(--tako-amber)', marginBottom: 18 }}>{tr('Help Centre', 'Centre d’aide')}</div>
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(36px,4.6vw,56px)', lineHeight: 1.02, letterSpacing: '-0.03em', margin: 0 }}>
-          How can we help?
+          {tr('How can we help?', 'Comment pouvons-nous aider ?')}
         </h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#fff', borderRadius: 16, padding: '6px 6px 6px 18px', maxWidth: 560, margin: '32px auto 0', boxShadow: 'var(--shadow-lg)' }}>
           <SIcon name="search" size={22} color="var(--gray-500)" />
-          <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search help articles…" style={{ border: 'none', outline: 'none', flex: 1, minWidth: 0, fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 16, padding: '12px 0', color: 'var(--fg-1)' }} />
+          <input value={query} onChange={e => setQuery(e.target.value)} placeholder={tr('Search help articles…', 'Rechercher dans l’aide…')} style={{ border: 'none', outline: 'none', flex: 1, minWidth: 0, fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 16, padding: '12px 0', color: 'var(--fg-1)' }} />
           {query && <button onClick={() => setQuery('')} style={{ background: 'var(--bg-3)', border: 'none', borderRadius: 999, width: 32, height: 32, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><SIcon name="x" size={18} color="var(--fg-2)" /></button>}
         </div>
       </div>
@@ -47,7 +48,7 @@ function HelpHero({ query, setQuery }) {
 function Categories({ setQuery }) {
   return (
     <section style={{ ...WRAP, paddingTop: 72, paddingBottom: 24 }} className="stack-pad">
-      <SectionHead over="Browse topics" title="Find answers by category" />
+      <SectionHead over={tr('Browse topics', 'Parcourir les thèmes')} title={tr('Find answers by category', 'Trouvez des réponses par catégorie')} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }} className="grid-3">
         {HELP_CATS.map(([ic, t, d], i) => (
           <Reveal key={t} delay={(i % 3) * 60}>
@@ -90,7 +91,7 @@ function FAQList({ query }) {
   return (
     <section style={{ ...WRAP, paddingTop: 56, paddingBottom: 96 }} className="stack-pad">
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 8, flexWrap: 'wrap', gap: 8 }}>
-        <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,3vw,36px)', letterSpacing: '-0.02em', margin: 0 }}>{q ? 'Search results' : 'Frequently asked'}</h2>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(26px,3vw,36px)', letterSpacing: '-0.02em', margin: 0 }}>{q ? tr('Search results', 'Résultats de recherche') : tr('Frequently asked', 'Questions fréquentes')}</h2>
         <span style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--fg-3)', fontWeight: 600 }}>{list.length} article{list.length !== 1 ? 's' : ''}</span>
       </div>
       {list.length ? (
@@ -100,7 +101,7 @@ function FAQList({ query }) {
       ) : (
         <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--fg-3)' }}>
           <SIcon name="search-x" size={40} color="var(--gray-400)" />
-          <p style={{ fontFamily: 'var(--font-text)', fontSize: 17, fontWeight: 600, margin: '16px 0 0' }}>No articles match “{query}”. Try a different word, or contact us below.</p>
+          <p style={{ fontFamily: 'var(--font-text)', fontSize: 17, fontWeight: 600, margin: '16px 0 0' }}>{tr('No articles match', 'Aucun article ne correspond à')} “{query}”. {tr('Try a different word, or contact us below.', 'Essayez un autre mot ou contactez-nous ci-dessous.')}</p>
         </div>
       )}
     </section>
@@ -109,14 +110,14 @@ function FAQList({ query }) {
 
 function ContactBand() {
   const opts = [
-    ['message-circle', 'Chat in the app', 'Fastest way to reach us — open the app and tap Help.', 'Open chat', 'auth.html'],
-    ['mail', 'Email support', 'support@tako.cm · we reply within one business day.', 'Send email', 'mailto:support@tako.cm'],
-    ['phone', 'Call us', '+237 233 00 00 00 · Mon–Sat, 8am–8pm WAT for urgent ride issues.', 'Call now', 'tel:+237233000000'],
+    ['message-circle', tr('Chat in the app', 'Discuter dans l’app'), tr('Fastest way to reach us — open the app and tap Help.', 'Le plus rapide — ouvrez l’app et appuyez sur Aide.'), tr('Open chat', 'Ouvrir le chat'), 'auth.html'],
+    ['mail', tr('Email support', 'Écrire au support'), tr('support@tako.cm · we reply within one business day.', 'support@tako.cm · réponse sous un jour ouvré.'), tr('Send email', 'Envoyer un e-mail'), 'mailto:support@tako.cm'],
+    ['phone', tr('Call us', 'Nous appeler'), tr('+237 233 00 00 00 · Mon–Sat, 8am–8pm WAT for urgent ride issues.', '+237 233 00 00 00 · Lun–Sam, 8h–20h WAT pour les problèmes urgents.'), tr('Call now', 'Appeler'), 'tel:+237233000000'],
   ];
   return (
     <section style={{ background: 'var(--bg-2)', paddingTop: 88, paddingBottom: 96, borderTop: '1px solid var(--border-1)' }}>
       <div style={WRAP} className="stack-pad">
-        <SectionHead over="Still stuck?" title="Talk to a human" sub="Our support team is based in Cameroon and ready to help with anything the articles didn’t cover." />
+        <SectionHead over={tr('Still stuck?', 'Toujours bloqué ?')} title={tr('Talk to a human', 'Parler à un humain')} sub={tr('Our support team is based in Cameroon and ready to help with anything the articles didn’t cover.', 'Notre équipe d’assistance est basée au Cameroun et prête à vous aider sur tout ce que les articles n’ont pas couvert.')} />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 20 }} className="grid-3">
           {opts.map(([ic, t, d, cta, href], i) => (
             <Reveal key={t} delay={i * 70} style={{ background: '#fff', border: '1px solid var(--border-1)', borderRadius: 20, padding: 30, display: 'flex', flexDirection: 'column' }}>
