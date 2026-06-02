@@ -15,7 +15,7 @@ function BizHero() {
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <SBtn variant="primary" icon="arrow-right" href="#quote">{tr('Get a quote', 'Demander un devis')}</SBtn>
-            <SBtn variant="outline" href="#how">{tr('How it works', 'Comment ça marche')}</SBtn>
+            <SBtn variant="outline" href="how-it-works.html">{tr('How it works', 'Comment ça marche')}</SBtn>
           </div>
         </div>
         <DashboardPreview />
