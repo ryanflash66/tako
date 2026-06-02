@@ -42,6 +42,16 @@ const TIERS = {
       ['handshake', tr('One ride, split easily', 'Une course, partagée facilement'), tr('Travel together and share the fare in the app.', 'Voyagez ensemble et partagez le prix dans l’app.')],
     ],
   },
+  green: {
+    name: 'Tako Green', icon: 'leaf', seats: '4', base: 900, perkm: 280,
+    tagline: tr('Ride greener', 'Roulez plus vert'),
+    desc: tr('Lower-emission rides in hybrid and electric cars — the same easy trip, with a lighter footprint on the planet.', 'Des courses à faibles émissions en voitures hybrides et électriques — le même trajet facile, avec une empreinte plus légère pour la planète.'),
+    feats: [
+      ['leaf', tr('Hybrid & electric cars', 'Voitures hybrides et électriques'), tr('Every Green trip runs on a hybrid or fully electric vehicle.', 'Chaque course Green se fait en véhicule hybride ou 100 % électrique.')],
+      ['badge-cent', tr('Everyday pricing', 'Prix du quotidien'), tr('A greener choice that stays easy on the wallet.', 'Un choix plus écologique qui reste doux pour le porte-monnaie.')],
+      ['route', tr('Cleaner city air', 'Un air plus pur en ville'), tr('Fewer tailpipe emissions on every ride across town.', 'Moins d’émissions à l’échappement à chaque course en ville.')],
+    ],
+  },
 };
 
 function getTier() {
@@ -98,7 +108,7 @@ function TierPage() {
           <SectionHead over={tr('Compare', 'Comparer')} title={tr('Other ways to ride', 'Autres façons de rouler')} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }} className="grid-3">
             {others.map(k => (
-              <a key={k} href={`tier.html?key=${k}`} className="lift" style={{ display: 'flex', alignItems: 'center', gap: 14, background: '#fff', border: '1px solid var(--border-1)', borderRadius: 16, padding: '20px 22px', textDecoration: 'none', color: 'var(--fg-1)' }}>
+              <a key={k} href={`ride-${k}.html`} className="lift" style={{ display: 'flex', alignItems: 'center', gap: 14, background: '#fff', border: '1px solid var(--border-1)', borderRadius: 16, padding: '20px 22px', textDecoration: 'none', color: 'var(--fg-1)' }}>
                 <div style={{ width: 46, height: 46, borderRadius: 12, background: 'var(--tako-black)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><SIcon name={TIERS[k].icon} size={22} /></div>
                 <span style={{ flex: 1, fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 17 }}>{TIERS[k].name}</span>
                 <SIcon name="arrow-right" size={18} color="var(--gray-400)" />
