@@ -2,10 +2,11 @@
 import { t as tr } from '../lib/i18n.js';
 
 const RIDE_TIERS = [
-  { key: 'moto', name: 'Tako Moto', icon: 'bike', desc: tr('Beat the traffic on two wheels — the fastest way across town.', 'Échappez aux embouteillages à deux roues — le moyen le plus rapide en ville.'), base: 400, perkm: 110, etaMin: 2, seats: '1' },
-  { key: 'go', name: 'Tako Go', icon: 'car', desc: tr('Affordable everyday rides for getting around the city.', 'Des courses abordables au quotidien pour circuler en ville.'), base: 700, perkm: 230, etaMin: 4, seats: '4' },
-  { key: 'comfort', name: 'Tako Comfort', icon: 'car-front', desc: tr('Newer cars, extra legroom and top-rated drivers.', 'Voitures récentes, plus d’espace et chauffeurs les mieux notés.'), base: 1100, perkm: 340, etaMin: 5, seats: '4' },
-  { key: 'xl', name: 'Tako XL', icon: 'users', desc: tr('Roomy rides for groups and luggage, up to six seats.', 'Des courses spacieuses pour les groupes et les bagages, jusqu’à six places.'), base: 1500, perkm: 430, etaMin: 7, seats: '6' },
+  { key: 'moto', name: 'Tako Moto', icon: 'bike', desc: tr('Beat the traffic on two wheels — the fastest way across town.', 'Échappez aux embouteillages à deux roues — le moyen le plus rapide en ville.'), base: 400, perkm: 110, etaMin: 2, seats: '1', page: 'ride-moto.html' },
+  { key: 'go', name: 'Tako Go', icon: 'car', desc: tr('Affordable everyday rides for getting around the city.', 'Des courses abordables au quotidien pour circuler en ville.'), base: 700, perkm: 230, etaMin: 4, seats: '4', page: 'ride-go.html' },
+  { key: 'comfort', name: 'Tako Comfort', icon: 'car-front', desc: tr('Newer cars, extra legroom and top-rated drivers.', 'Voitures récentes, plus d’espace et chauffeurs les mieux notés.'), base: 1100, perkm: 340, etaMin: 5, seats: '4', page: 'ride-comfort.html' },
+  { key: 'xl', name: 'Tako XL', icon: 'users', desc: tr('Roomy rides for groups and luggage, up to six seats.', 'Des courses spacieuses pour les groupes et les bagages, jusqu’à six places.'), base: 1500, perkm: 430, etaMin: 7, seats: '6', page: 'ride-xl.html' },
+  { key: 'green', name: 'Tako Green', icon: 'leaf', desc: tr('Lower-emission rides in hybrid and electric cars.', 'Des courses à faibles émissions en voitures hybrides et électriques.'), base: 900, perkm: 280, etaMin: 3, seats: '4', page: 'ride-green.html' },
 ];
 
 function kmFor(from, to) {
@@ -95,7 +96,7 @@ function RideHero() {
 function RideOptions() {
   return (
     <section style={{ ...WRAP, paddingTop: 96, paddingBottom: 96 }} className="stack-pad">
-      <SectionHead over={tr('Ride options', 'Options de course')} title={tr('Pick the ride that fits the moment', 'La course qui convient au moment')} sub={tr('Four ways to move, all with fares shown up front and drivers you can trust.', 'Quatre façons de vous déplacer, avec des prix affichés à l’avance et des chauffeurs de confiance.')} />
+      <SectionHead over={tr('Ride options', 'Options de course')} title={tr('Pick the ride that fits the moment', 'La course qui convient au moment')} sub={tr('Five ways to move, all with fares shown up front and drivers you can trust.', 'Cinq façons de vous déplacer, avec des prix affichés à l’avance et des chauffeurs de confiance.')} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 20 }} className="grid-2">
         {RIDE_TIERS.map((t, i) => (
           <Reveal key={t.key} delay={i * 60} className="lift" style={{ display: 'flex', gap: 22, background: '#fff', border: '1px solid var(--border-1)', borderRadius: 20, padding: 28 }}>
@@ -110,7 +111,7 @@ function RideOptions() {
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><SIcon name="user" size={15} /> {t.seats} {tr('seat', 'place')}{t.seats !== '1' ? 's' : ''}</span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><SIcon name="clock" size={15} /> ~{t.etaMin} {tr('min away', 'min')}</span>
               </div>
-              <a href={`tier.html?key=${t.key}`} className="link-amber" style={{ fontSize: 14, marginTop: 14, display: 'inline-flex' }}>{tr('Learn more', 'En savoir plus')} <SIcon name="arrow-right" size={16} /></a>
+              <a href={t.page} className="link-amber" style={{ fontSize: 14, marginTop: 14, display: 'inline-flex' }}>{tr('Learn more', 'En savoir plus')} <SIcon name="arrow-right" size={16} /></a>
             </div>
           </Reveal>
         ))}
