@@ -1,13 +1,14 @@
 /* Tako website — shared shell: atoms, Nav, Footer, motifs. Exported to window. */
+import { t, getLang, setLang } from '../lib/i18n.js';
 
 const WRAP = { maxWidth: 1200, margin: '0 auto', padding: '0 32px', width: '100%' };
 
 const NAV_LINKS = [
-  { label: 'Ride', href: 'ride.html' },
-  { label: 'Drive', href: 'drive.html' },
-  { label: 'Cities', href: 'cities.html' },
-  { label: 'Business', href: 'business.html' },
-  { label: 'Safety', href: 'safety.html' },
+  { label: 'Ride', fr: 'Course', href: 'ride.html' },
+  { label: 'Drive', fr: 'Conduire', href: 'drive.html' },
+  { label: 'Cities', fr: 'Villes', href: 'cities.html' },
+  { label: 'Business', fr: 'Entreprise', href: 'business.html' },
+  { label: 'Safety', fr: 'Sécurité', href: 'safety.html' },
 ];
 
 function useIcons() {
@@ -146,14 +147,15 @@ function Nav({ active }) {
           <SiteLogo />
           <nav className="nav-links">
             {NAV_LINKS.map(l => (
-              <a key={l.href} href={l.href} className={`nav-link ${active === l.href ? 'active' : ''}`}>{l.label}</a>
+              <a key={l.href} href={l.href} className={`nav-link ${active === l.href ? 'active' : ''}`}>{t(l.label, l.fr)}</a>
             ))}
           </nav>
           <div className="nav-right">
-            <a href="#" className="nav-link desktop-only" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <SIcon name="globe" size={18} /> EN
-            </a>
-            <a href="help.html" className="nav-link desktop-only">Help</a>
+            <button onClick={() => setLang(getLang() === 'fr' ? 'en' : 'fr')} className="nav-link desktop-only"
+              aria-label="Switch language" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none' }}>
+              <SIcon name="globe" size={18} /> {getLang().toUpperCase()}
+            </button>
+            <a href="help.html" className="nav-link desktop-only">{t('Help', 'Aide')}</a>
             {user ? (
               <div className="desktop-only" ref={acctRef} style={{ position: 'relative' }}>
                 <button onClick={() => setAcct(a => !a)} style={{ display: 'flex', alignItems: 'center', gap: 9, background: 'var(--tako-black)', color: '#fff', border: 'none', borderRadius: 999, padding: '6px 12px 6px 6px', cursor: 'pointer' }}>
@@ -167,17 +169,17 @@ function Nav({ active }) {
                       <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16 }}>{user.first} {user.last}</div>
                       <div style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-3)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.contact}</div>
                     </div>
-                    {menuItem('user', 'Account', () => {})}
-                    {menuItem('wallet', 'Wallet', () => {})}
-                    {menuItem('receipt', 'Receipts', () => {})}
-                    {menuItem('log-out', 'Sign out', signOut)}
+                    {menuItem('user', t('Account', 'Compte'), () => { window.location.href = 'index.html'; })}
+                    {menuItem('wallet', t('Wallet', 'Portefeuille'), () => { window.location.href = 'index.html'; })}
+                    {menuItem('receipt', t('Receipts', 'Reçus'), () => { window.location.href = 'index.html'; })}
+                    {menuItem('log-out', t('Sign out', 'Déconnexion'), signOut)}
                   </div>
                 )}
               </div>
             ) : (
               <React.Fragment>
-                <span className="desktop-only"><SBtn variant="ghost" href="auth.html" style={{ fontSize: 15 }}>Log in</SBtn></span>
-                <span className="desktop-only"><SBtn variant="primary" href="auth.html" style={{ fontSize: 15, padding: '11px 20px' }}>Sign up</SBtn></span>
+                <span className="desktop-only"><SBtn variant="ghost" href="auth.html" style={{ fontSize: 15 }}>{t('Log in', 'Connexion')}</SBtn></span>
+                <span className="desktop-only"><SBtn variant="primary" href="auth.html" style={{ fontSize: 15, padding: '11px 20px' }}>{t('Sign up', "S'inscrire")}</SBtn></span>
               </React.Fragment>
             )}
             <button className="hamburger" aria-label="Menu" onClick={() => setOpen(o => !o)}>
@@ -186,18 +188,18 @@ function Nav({ active }) {
           </div>
         </div>
         <div className="mobile-menu" style={{ display: open ? 'flex' : 'none' }}>
-          {NAV_LINKS.map(l => <a key={l.href} href={l.href}>{l.label}</a>)}
-          <a href="help.html">Help</a>
+          {NAV_LINKS.map(l => <a key={l.href} href={l.href}>{t(l.label, l.fr)}</a>)}
+          <a href="help.html">{t('Help', 'Aide')}</a>
           {user ? (
             <div style={{ display: 'flex', gap: 10, marginTop: 16, alignItems: 'center' }}>
               <span style={{ width: 40, height: 40, borderRadius: 999, background: 'var(--tako-amber)', color: 'var(--tako-black)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 17 }}>{(user.first[0] || 'T').toUpperCase()}</span>
               <span style={{ flex: 1, fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18 }}>{user.first} {user.last}</span>
-              <SBtn variant="outline" onClick={signOut}>Sign out</SBtn>
+              <SBtn variant="outline" onClick={signOut}>{t('Sign out', 'Déconnexion')}</SBtn>
             </div>
           ) : (
             <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
-              <SBtn variant="outline" href="auth.html" style={{ flex: 1 }}>Log in</SBtn>
-              <SBtn variant="primary" href="auth.html" style={{ flex: 1 }}>Sign up</SBtn>
+              <SBtn variant="outline" href="auth.html" style={{ flex: 1 }}>{t('Log in', 'Connexion')}</SBtn>
+              <SBtn variant="primary" href="auth.html" style={{ flex: 1 }}>{t('Sign up', "S'inscrire")}</SBtn>
             </div>
           )}
         </div>
@@ -215,15 +217,15 @@ function DownloadBand() {
         <LaneMotif style={{ opacity: 0.5 }} />
         <div style={{ position: 'relative' }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(28px,3vw,40px)', letterSpacing: '-0.02em', color: '#fff', margin: '0 0 12px' }}>
-            Get the Tako app
+            {t('Get the Tako app', 'Téléchargez l’app Tako')}
           </h2>
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 18, color: 'var(--gray-300)', margin: 0 }}>
-            Free to download. Ready when you are.
+            {t('Free to download. Ready when you are.', 'Gratuit à télécharger. Prêt quand vous l’êtes.')}
           </p>
         </div>
         <div style={{ position: 'relative', display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-          <button className="store-btn"><AppleLogo size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>Download on the</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>App Store</div></div></button>
-          <button className="store-btn"><SIcon name="play" size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>Get it on</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>Google Play</div></div></button>
+          <a className="store-btn" href="https://apps.apple.com/" target="_blank" rel="noopener" style={{ textDecoration: 'none' }}><AppleLogo size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>{t('Download on the', 'Télécharger sur l’')}</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>App Store</div></div></a>
+          <a className="store-btn" href="https://play.google.com/" target="_blank" rel="noopener" style={{ textDecoration: 'none' }}><SIcon name="play" size={24} /><div style={{ textAlign: 'left' }}><div style={{ fontSize: 11, color: 'var(--gray-400)' }}>{t('Get it on', 'Disponible sur')}</div><div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'var(--font-display)' }}>Google Play</div></div></a>
         </div>
       </div>
     </section>
@@ -232,9 +234,9 @@ function DownloadBand() {
 
 function Footer() {
   const cols = [
-    ['Ride', [['Cities', 'cities.html'], ['Safety', 'safety.html'], ['Tako Business', 'business.html'], ['Help Centre', 'help.html']]],
-    ['Drive', [['Become a driver', 'drive.html'], ['Requirements', 'drive.html'], ['Driver app', 'drive.html'], ['Earnings', 'drive.html']]],
-    ['Company', [['About', '#'], ['Careers', '#'], ['Newsroom', '#'], ['Contact', 'help.html']]],
+    [t('Ride', 'Course'), [['Cities', 'cities.html', 'Villes'], ['Safety', 'safety.html', 'Sécurité'], ['Tako Business', 'business.html', 'Tako Entreprise'], ['Help Centre', 'help.html', 'Centre d’aide']]],
+    [t('Drive', 'Conduire'), [['Become a driver', 'drive.html', 'Devenir chauffeur'], ['Requirements', 'drive.html', 'Conditions'], ['Driver app', 'drive.html', 'App chauffeur'], ['Earnings', 'drive.html', 'Revenus']]],
+    [t('Company', 'Entreprise'), [['About', 'about.html', 'À propos'], ['Careers', 'careers.html', 'Carrières'], ['Newsroom', 'newsroom.html', 'Actualités'], ['Contact', 'help.html', 'Contact']]],
   ];
   return (
     <footer style={{ background: 'var(--tako-black)', color: '#fff' }}>
@@ -242,7 +244,7 @@ function Footer() {
         <div>
           <SiteLogo dark />
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--gray-500)', margin: '16px 0 20px', maxWidth: 250, lineHeight: 1.5 }}>
-            Convenient rides across Cameroon, every day. From Douala traffic to rural roads.
+            {t('Convenient rides across Cameroon, every day. From Douala traffic to rural roads.', 'Des trajets pratiques partout au Cameroun, chaque jour. Du trafic de Douala aux routes rurales.')}
           </p>
           <div style={{ display: 'flex', gap: 10 }}>
             {['App Store', 'Google Play'].map(s => (
@@ -253,15 +255,15 @@ function Footer() {
         {cols.map(([h, items]) => (
           <div key={h}>
             <div style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: 16 }}>{h}</div>
-            {items.map(([it, href]) => <a key={it} href={href} style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 500, fontSize: 15, color: 'var(--gray-200)', textDecoration: 'none', marginBottom: 12, width: 'fit-content' }} className="link-amber">{it}</a>)}
+            {items.map(([it, href, fr]) => <a key={it} href={href} style={{ display: 'block', fontFamily: 'var(--font-text)', fontWeight: 500, fontSize: 15, color: 'var(--gray-200)', textDecoration: 'none', marginBottom: 12, width: 'fit-content' }} className="link-amber">{t(it, fr)}</a>)}
           </div>
         ))}
       </div>
       <div style={{ ...WRAP, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--tako-charcoal)', paddingTop: 24, paddingBottom: 40, flexWrap: 'wrap', gap: 16 }} className="stack-pad">
         <span style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--gray-500)' }}>© 2026 Tako Mobility. Douala, Cameroon.</span>
         <div style={{ display: 'flex', gap: 18 }}>
-          {['instagram', 'facebook', 'twitter', 'linkedin'].map(s => (
-            <a key={s} href="#" style={{ color: 'var(--gray-500)' }} className="link-amber"><SIcon name={s} size={20} /></a>
+          {[['instagram', 'https://instagram.com/takomobility'], ['facebook', 'https://facebook.com/takomobility'], ['twitter', 'https://twitter.com/takomobility'], ['linkedin', 'https://linkedin.com/company/tako-mobility']].map(([s, url]) => (
+            <a key={s} href={url} target="_blank" rel="noopener" style={{ color: 'var(--gray-500)' }} className="link-amber"><SIcon name={s} size={20} /></a>
           ))}
         </div>
       </div>

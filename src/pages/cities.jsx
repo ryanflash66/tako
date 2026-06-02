@@ -77,7 +77,8 @@ function CityExplorer() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
             {city.routes.map(r => <span key={r} style={{ fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 13, background: 'var(--bg-3)', borderRadius: 999, padding: '7px 14px' }}>{r}</span>)}
           </div>
-          <SBtn variant={city.status === 'live' ? 'primary' : 'outline'} icon="arrow-right" style={{ width: '100%' }}>
+          <SBtn variant={city.status === 'live' ? 'primary' : 'outline'} icon="arrow-right" style={{ width: '100%' }}
+            href={city.status === 'live' ? 'auth.html' : '#request-city'}>
             {city.status === 'live' ? `Request a ride in ${city.name}` : `Notify me when ${city.name} is live`}
           </SBtn>
         </div>
@@ -125,18 +126,28 @@ function AllCities() {
 }
 
 function RequestCity() {
+  const [city, setCity] = React.useState('');
+  const [sent, setSent] = React.useState(false);
+  const submit = (e) => { e.preventDefault(); if (city.trim()) setSent(true); };
   return (
-    <section style={{ ...WRAP, paddingTop: 16, paddingBottom: 96 }} className="stack-pad">
+    <section id="request-city" style={{ ...WRAP, paddingTop: 16, paddingBottom: 96 }} className="stack-pad">
       <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--tako-black)', borderRadius: 28, padding: '64px 56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32, flexWrap: 'wrap' }}>
         <LaneMotif style={{ opacity: 0.4 }} />
         <div style={{ position: 'relative', maxWidth: 480 }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(28px,3vw,40px)', letterSpacing: '-0.02em', color: '#fff', margin: '0 0 12px' }}>Don’t see your city?</h2>
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 18, color: 'var(--gray-300)', margin: 0 }}>Tell us where you want Tako next. Demand decides where we go.</p>
         </div>
-        <div style={{ position: 'relative', display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          <input className="t-input" placeholder="Your city" style={{ width: 200, background: '#fff' }} />
-          <SBtn variant="amber" icon="arrow-right">Request Tako</SBtn>
-        </div>
+        {sent ? (
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 14, background: 'var(--success-bg)', color: 'var(--success)', borderRadius: 14, padding: '18px 22px', maxWidth: 360 }}>
+            <div style={{ width: 44, height: 44, borderRadius: 999, background: 'var(--success)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><SIcon name="check" size={24} /></div>
+            <p style={{ fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 15, lineHeight: 1.45, margin: 0 }}>Thanks — we’ll let you know when Tako reaches {city.trim()}.</p>
+          </div>
+        ) : (
+          <form onSubmit={submit} style={{ position: 'relative', display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <input className="t-input" placeholder="Your city" value={city} onChange={e => setCity(e.target.value)} style={{ width: 200, background: '#fff' }} />
+            <SBtn variant="amber" icon="arrow-right">Request Tako</SBtn>
+          </form>
+        )}
       </div>
     </section>
   );

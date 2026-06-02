@@ -207,7 +207,7 @@ function SignupCTA() {
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(30px,3.4vw,44px)', letterSpacing: '-0.025em', color: '#fff', margin: '0 0 16px' }}>Ready to earn on your terms?</h2>
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 18, color: 'var(--gray-300)', margin: '0 0 28px' }}>Sign up in minutes. Drive this week.</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <SBtn variant="amber" icon="arrow-right" size="lg">Become a Tako driver</SBtn>
+            <SBtn variant="amber" icon="arrow-right" size="lg" href="auth.html">Become a Tako driver</SBtn>
             <SBtn variant="outlineLight" size="lg" href="help.html">Talk to our team</SBtn>
           </div>
         </div>

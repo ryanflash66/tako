@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found · Tako</title>
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/png" href="/assets/tako-mark.png" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      background: #0A0A0A;
+      color: #fff;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .wrap { max-width: 460px; }
+    .mark { width: 56px; height: 56px; object-fit: contain; margin-bottom: 28px; }
+    .code {
+      font-weight: 800;
+      font-size: clamp(72px, 18vw, 120px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin: 0;
+      color: #F7951D;
+    }
+    h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 18px 0 10px; }
+    p { font-size: 16px; line-height: 1.55; color: #A2A4A2; margin: 0 0 28px; }
+    .btn {
+      display: inline-block;
+      background: #F7951D;
+      color: #0A0A0A;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 14px 26px;
+      border-radius: 999px;
+      transition: filter .15s;
+    }
+    .btn:hover { filter: brightness(0.92); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="mark" src="/assets/tako-mark.png" alt="Tako" />
+    <p class="code">404</p>
+    <h1>This road doesn't exist.</h1>
+    <p>The page you're looking for has moved or was never here. Let's get you back on route.</p>
+    <a class="btn" href="/">Back to Tako</a>
+  </div>
+</body>
+</html>

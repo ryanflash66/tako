@@ -57,7 +57,7 @@ function FareEstimator() {
               );
             })}
           </div>
-          <SBtn variant="amber" icon="arrow-right" style={{ width: '100%', marginTop: 16 }}>Request {RIDE_TIERS.find(t => t.key === sel).name}</SBtn>
+          <SBtn variant="amber" icon="arrow-right" href="auth.html" style={{ width: '100%', marginTop: 16 }}>Request {RIDE_TIERS.find(t => t.key === sel).name}</SBtn>
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 12, color: 'var(--fg-3)', textAlign: 'center', margin: '12px 0 0' }}>Estimates in FCFA. Final fare confirmed in the app before you ride.</p>
         </React.Fragment>
       ) : (
