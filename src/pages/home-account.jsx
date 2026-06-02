@@ -160,7 +160,7 @@ function AccountModal({ tab, setTab, onClose, user, onPickTrip }) {
               </div>
             ))}
           </div>
-          <SBtn variant="outline" iconLeft="plus" style={{ width: '100%', marginTop: 14 }}>{tr('Add payment method', 'Ajouter un moyen de paiement')}</SBtn>
+          <SBtn variant="outline" iconLeft="plus" href="payment.html" style={{ width: '100%', marginTop: 14 }}>{tr('Add payment method', 'Ajouter un moyen de paiement')}</SBtn>
         </div>
       )}
       {tab === 'receipts' && (
