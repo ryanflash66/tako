@@ -79,7 +79,7 @@ function DriveHero() {
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <SBtn variant="amber" icon="arrow-right" href="#signup">{tr('Start earning', 'Commencer à gagner')}</SBtn>
-            <SBtn variant="outlineLight" href="#requirements">{tr('See requirements', 'Voir les conditions')}</SBtn>
+            <SBtn variant="outlineLight" href="requirements.html">{tr('See requirements', 'Voir les conditions')}</SBtn>
           </div>
         </div>
         <EarningsCalculator />
@@ -137,6 +137,11 @@ function Requirements() {
               </ul>
             </div>
           ))}
+        </div>
+        <div style={{ marginTop: 32, display: 'flex', gap: 24, flexWrap: 'wrap', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 16 }}>
+          <a href="requirements.html" className="link-amber">{tr('Full requirements', 'Conditions détaillées')} <SIcon name="arrow-right" size={17} /></a>
+          <a href="earnings.html" className="link-amber">{tr('How earnings work', 'Comment ça paie')} <SIcon name="arrow-right" size={17} /></a>
+          <a href="driver-app.html" className="link-amber">{tr('The driver app', 'L’app chauffeur')} <SIcon name="arrow-right" size={17} /></a>
         </div>
       </div>
     </section>
@@ -209,7 +214,7 @@ function SignupCTA() {
           <p style={{ fontFamily: 'var(--font-text)', fontSize: 18, color: 'var(--gray-300)', margin: '0 0 28px' }}>{tr('Sign up in minutes. Drive this week.', 'Inscrivez-vous en quelques minutes. Conduisez cette semaine.')}</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <SBtn variant="amber" icon="arrow-right" size="lg" href="auth.html">{tr('Become a Tako driver', 'Devenir chauffeur Tako')}</SBtn>
-            <SBtn variant="outlineLight" size="lg" href="help.html">{tr('Talk to our team', 'Parler à notre équipe')}</SBtn>
+            <SBtn variant="outlineLight" size="lg" href="contact.html">{tr('Talk to our team', 'Parler à notre équipe')}</SBtn>
           </div>
         </div>
       </div>
