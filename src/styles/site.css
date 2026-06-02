@@ -127,6 +127,16 @@ a { color: inherit; }
 .hero-leaflet .leaflet-control-attribution { background: rgba(10,10,10,.42) !important; color: #6b6c64 !important; font-size: 10px; padding: 1px 6px; }
 .hero-leaflet .leaflet-control-attribution a { color: #8a8b82 !important; }
 
+/* Cities page — real map of Cameroon with clickable city pins */
+.cities-leaflet.leaflet-container { background: var(--tako-charcoal); font-family: var(--font-mono); }
+.cities-leaflet .leaflet-control-attribution { background: rgba(10,10,10,.42) !important; color: #6b6c64 !important; font-size: 10px; padding: 1px 6px; }
+.cities-leaflet .leaflet-control-attribution a { color: #8a8b82 !important; }
+.cities-pin { background: transparent !important; border: none !important; cursor: var(--dot-cursor) !important; }
+.cm-pin { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.cm-dot { display: block; transition: width .15s, height .15s, box-shadow .15s; }
+.cm-ring { position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; border-radius: 50%; background: rgba(247,149,29,.5); transform: translate(-50%,-50%); animation: ring-pulse 1.9s ease-out infinite; }
+.cm-label { position: absolute; left: 50%; bottom: 100%; margin-bottom: 9px; transform: translateX(-50%); white-space: nowrap; font-family: var(--font-text); font-weight: 700; font-size: 12px; color: #fff; background: rgba(10,10,10,.78); padding: 3px 8px; border-radius: 6px; }
+
 /* ---- Accordion ---- */
 .acc-item { border-bottom: 1px solid var(--border-1); }
 .acc-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; background: none; border: none; cursor: pointer; padding: 24px 0; text-align: left; }

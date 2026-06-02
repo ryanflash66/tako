@@ -2,45 +2,82 @@
 import { t as tr } from '../lib/i18n.js';
 
 const CITIES = [
-  { name: 'Douala', region: 'Littoral', status: 'live', drivers: '3,200+', since: '2023', routes: ['Akwa ↔ Bonabéri', 'Airport ↔ Bonapriso', 'Deido ↔ Akwa'], x: 18, y: 64 },
-  { name: 'Yaoundé', region: 'Centre', status: 'live', drivers: '2,600+', since: '2023', routes: ['Bastos ↔ Centre-ville', 'Nsam ↔ Mvan', 'Airport ↔ Bastos'], x: 42, y: 58 },
-  { name: 'Bafoussam', region: 'Ouest', status: 'live', drivers: '720+', since: '2024', routes: ['Marché A ↔ Tamdja', 'Kamkop ↔ Centre'], x: 33, y: 49 },
-  { name: 'Bamenda', region: 'Nord-Ouest', status: 'live', drivers: '680+', since: '2024', routes: ['Commercial Ave ↔ Up Station', 'Nkwen ↔ Mile 4'], x: 28, y: 42 },
-  { name: 'Buea', region: 'Sud-Ouest', status: 'live', drivers: '540+', since: '2024', routes: ['Molyko ↔ Town', 'Mile 17 ↔ Bonduma'], x: 13, y: 58 },
-  { name: 'Limbe', region: 'Sud-Ouest', status: 'live', drivers: '410+', since: '2024', routes: ['Down Beach ↔ Mile 4', 'Bota ↔ Town'], x: 11, y: 63 },
-  { name: 'Kribi', region: 'Sud', status: 'live', drivers: '230+', since: '2025', routes: ['Beach ↔ Centre', 'Port ↔ Town'], x: 26, y: 74 },
-  { name: 'Edéa', region: 'Littoral', status: 'live', drivers: '190+', since: '2025', routes: ['Centre ↔ Gare', 'Pongo ↔ Marché'], x: 24, y: 65 },
-  { name: 'Garoua', region: 'Nord', status: 'live', drivers: '300+', since: '2025', routes: ['Marché Central ↔ Roumdé', 'Airport ↔ Centre'], x: 60, y: 22 },
-  { name: 'Maroua', region: 'Extrême-Nord', status: 'live', drivers: '240+', since: '2025', routes: ['Domayo ↔ Centre', 'Marché ↔ Hardé'], x: 72, y: 10 },
-  { name: 'Ngaoundéré', region: 'Adamaoua', status: 'live', drivers: '210+', since: '2025', routes: ['Gare ↔ Centre', 'Dang ↔ Ville'], x: 56, y: 34 },
-  { name: 'Bertoua', region: 'Est', status: 'soon', drivers: '—', since: 'Q3 2026', routes: ['Launching soon'], x: 58, y: 56 },
+  { name: 'Douala', region: 'Littoral', status: 'live', drivers: '3,200+', since: '2023', routes: ['Akwa ↔ Bonabéri', 'Airport ↔ Bonapriso', 'Deido ↔ Akwa'], lat: 4.051, lng: 9.768 },
+  { name: 'Yaoundé', region: 'Centre', status: 'live', drivers: '2,600+', since: '2023', routes: ['Bastos ↔ Centre-ville', 'Nsam ↔ Mvan', 'Airport ↔ Bastos'], lat: 3.866, lng: 11.516 },
+  { name: 'Bafoussam', region: 'Ouest', status: 'live', drivers: '720+', since: '2024', routes: ['Marché A ↔ Tamdja', 'Kamkop ↔ Centre'], lat: 5.478, lng: 10.418 },
+  { name: 'Bamenda', region: 'Nord-Ouest', status: 'live', drivers: '680+', since: '2024', routes: ['Commercial Ave ↔ Up Station', 'Nkwen ↔ Mile 4'], lat: 5.963, lng: 10.159 },
+  { name: 'Buea', region: 'Sud-Ouest', status: 'live', drivers: '540+', since: '2024', routes: ['Molyko ↔ Town', 'Mile 17 ↔ Bonduma'], lat: 4.155, lng: 9.241 },
+  { name: 'Limbe', region: 'Sud-Ouest', status: 'live', drivers: '410+', since: '2024', routes: ['Down Beach ↔ Mile 4', 'Bota ↔ Town'], lat: 4.017, lng: 9.215 },
+  { name: 'Kribi', region: 'Sud', status: 'live', drivers: '230+', since: '2025', routes: ['Beach ↔ Centre', 'Port ↔ Town'], lat: 2.937, lng: 9.910 },
+  { name: 'Edéa', region: 'Littoral', status: 'live', drivers: '190+', since: '2025', routes: ['Centre ↔ Gare', 'Pongo ↔ Marché'], lat: 3.800, lng: 10.134 },
+  { name: 'Garoua', region: 'Nord', status: 'live', drivers: '300+', since: '2025', routes: ['Marché Central ↔ Roumdé', 'Airport ↔ Centre'], lat: 9.301, lng: 13.398 },
+  { name: 'Maroua', region: 'Extrême-Nord', status: 'live', drivers: '240+', since: '2025', routes: ['Domayo ↔ Centre', 'Marché ↔ Hardé'], lat: 10.591, lng: 14.316 },
+  { name: 'Ngaoundéré', region: 'Adamaoua', status: 'live', drivers: '210+', since: '2025', routes: ['Gare ↔ Centre', 'Dang ↔ Ville'], lat: 7.327, lng: 13.584 },
+  { name: 'Bertoua', region: 'Est', status: 'soon', drivers: '—', since: 'Q3 2026', routes: ['Launching soon'], lat: 4.577, lng: 13.685 },
 ];
 
+// Pin markup for a city on the Leaflet map (amber dot = live, dashed = soon;
+// selected city gets a pulsing ring + a name label).
+function cityPinHTML(c, sel) {
+  const live = c.status === 'live';
+  const size = sel ? 18 : 12;
+  const dot = live
+    ? `width:${size}px;height:${size}px;border-radius:999px;background:var(--tako-amber);border:2px solid #fff;box-shadow:${sel ? '0 0 0 6px rgba(247,149,29,.25)' : '0 1px 3px rgba(0,0,0,.55)'};`
+    : `width:${size}px;height:${size}px;border-radius:999px;background:transparent;border:2px dashed var(--gray-500);`;
+  const ring = sel && live ? '<span class="cm-ring"></span>' : '';
+  const label = sel ? `<span class="cm-label">${c.name}</span>` : '';
+  return `<div class="cm-pin">${ring}<span class="cm-dot" style="${dot}"></span>${label}</div>`;
+}
+
+// A real dark map of Cameroon (Leaflet + CARTO tiles) with the live-city pins.
 function MapPanel({ active, onPick }) {
+  const ref = React.useRef(null);
+  const markers = React.useRef({});
+  const pick = React.useRef(onPick);
+  pick.current = onPick;
+
+  React.useEffect(() => {
+    if (!window.L || !ref.current) return;
+    const map = L.map(ref.current, {
+      zoomControl: false, attributionControl: true, dragging: false, scrollWheelZoom: false,
+      doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false,
+      tap: false, fadeAnimation: false, inertia: false,
+    });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd', maxZoom: 20, detectRetina: true,
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+    }).addTo(map);
+    // Frame the whole country (SW + NE corners of Cameroon).
+    map.fitBounds([[1.55, 8.30], [13.20, 16.30]], { padding: [24, 24] });
+
+    CITIES.forEach(c => {
+      const mk = L.marker([c.lat, c.lng], {
+        icon: L.divIcon({ className: 'cities-pin', iconSize: [22, 22], iconAnchor: [11, 11], html: cityPinHTML(c, false) }),
+        keyboard: false, title: c.name, riseOnHover: true,
+      }).addTo(map);
+      mk.on('click', () => pick.current && pick.current(c.name));
+      markers.current[c.name] = { mk, c };
+    });
+
+    const fix = () => map.invalidateSize({ animate: false });
+    setTimeout(fix, 60); setTimeout(fix, 400);
+    window.addEventListener('resize', fix);
+    return () => { window.removeEventListener('resize', fix); map.remove(); markers.current = {}; };
+  }, []);
+
+  // Re-skin pins whenever the selected city changes.
+  React.useEffect(() => {
+    Object.values(markers.current).forEach(({ mk, c }) => {
+      const sel = active === c.name;
+      mk.setIcon(L.divIcon({ className: 'cities-pin', iconSize: [22, 22], iconAnchor: [11, 11], html: cityPinHTML(c, sel) }));
+      mk.setZIndexOffset(sel ? 1000 : 0);
+    });
+  }, [active]);
+
   return (
-    <div style={{ position: 'relative', height: '100%', minHeight: 420, background: 'var(--tako-charcoal)', borderRadius: 24, overflow: 'hidden' }}>
-      <svg viewBox="0 0 100 90" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-        <g stroke="rgba(255,255,255,0.06)" strokeWidth="0.4">
-          {CITIES.filter(c => c.status === 'live').map((c, i) => {
-            const n = CITIES[(i + 1) % CITIES.length];
-            return <line key={c.name} x1={c.x} y1={c.y} x2={n.x} y2={n.y} />;
-          })}
-        </g>
-      </svg>
-      {CITIES.map(c => {
-        const isLive = c.status === 'live';
-        const sel = active === c.name;
-        return (
-          <button key={c.name} onClick={() => onPick(c.name)} title={c.name}
-            style={{ position: 'absolute', left: `${c.x}%`, top: `${c.y}%`, transform: 'translate(-50%,-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, zIndex: sel ? 5 : 2 }}>
-            <span className={sel ? 'pulse' : ''} style={{ display: 'block', width: sel ? 18 : 12, height: sel ? 18 : 12, borderRadius: 999,
-              background: isLive ? 'var(--tako-amber)' : 'transparent', border: isLive ? '2px solid #fff' : '2px dashed var(--gray-500)',
-              boxShadow: sel ? '0 0 0 6px rgba(247,149,29,0.25)' : 'none', transition: 'all .15s' }} />
-            {sel && <span style={{ position: 'absolute', left: '50%', top: -26, transform: 'translateX(-50%)', whiteSpace: 'nowrap', fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 12, color: '#fff', background: 'rgba(10,10,10,0.7)', padding: '3px 8px', borderRadius: 6 }}>{c.name}</span>}
-          </button>
-        );
-      })}
-      <div style={{ position: 'absolute', bottom: 16, left: 16, display: 'flex', gap: 16, fontFamily: 'var(--font-text)', fontSize: 12, fontWeight: 600, color: 'var(--gray-300)' }}>
+    <div style={{ position: 'relative', height: '100%', minHeight: 440, background: 'var(--tako-charcoal)', borderRadius: 24, overflow: 'hidden' }}>
+      <div ref={ref} className="cities-leaflet" style={{ position: 'absolute', inset: 0, background: 'var(--tako-charcoal)' }} />
+      <div style={{ position: 'absolute', bottom: 16, left: 16, zIndex: 1000, pointerEvents: 'none', display: 'flex', gap: 16, fontFamily: 'var(--font-text)', fontSize: 12, fontWeight: 600, color: 'var(--gray-300)' }}>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}><span style={{ width: 10, height: 10, borderRadius: 999, background: 'var(--tako-amber)', border: '1.5px solid #fff' }} /> {tr('Live', 'En service')}</span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}><span style={{ width: 10, height: 10, borderRadius: 999, border: '1.5px dashed var(--gray-500)' }} /> {tr('Coming soon', 'Bientôt')}</span>
       </div>
