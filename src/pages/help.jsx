@@ -26,6 +26,16 @@ const HELP_CATS = [
   ['briefcase', tr('Business', 'Entreprise'), tr('Company accounts and billing', 'Comptes entreprise et facturation')],
 ];
 
+// Dedicated Help category pages (Uber/Lyft Help Centre style) — [icon, label, description, href]
+const TOPIC_PAGES = [
+  ['user-round', tr('Account', 'Compte'), tr('Manage your profile, phone number and login.', 'Gérez votre profil, votre numéro de téléphone et votre connexion.'), 'help-account.html'],
+  ['wallet', tr('Payments', 'Paiements'), tr('Fares, receipts, refunds and Mobile Money.', 'Prix, reçus, remboursements et Mobile Money.'), 'help-payments.html'],
+  ['car-front', tr('Rides', 'Courses'), tr('Booking, ride options, stops and trip history.', 'Réservation, options de course, arrêts et historique des trajets.'), 'help-rides.html'],
+  ['shield', tr('Safety', 'Sécurité'), tr('Trip sharing, the emergency button and reporting.', 'Partage de trajet, bouton d’urgence et signalements.'), 'help-safety.html'],
+  ['navigation', tr('Driving', 'Conduite'), tr('Sign up to drive, requirements and weekly payouts.', 'Devenez chauffeur : conditions et paiements hebdomadaires.'), 'help-driving.html'],
+  ['briefcase', tr('Business', 'Entreprise'), tr('Company accounts, invoicing and travel reports.', 'Comptes entreprise, facturation et rapports de déplacements.'), 'help-business.html'],
+];
+
 function HelpHero({ query, setQuery }) {
   return (
     <section style={{ background: 'var(--tako-black)', color: '#fff', position: 'relative', overflow: 'hidden' }}>
@@ -59,6 +69,28 @@ function Categories({ setQuery }) {
                 <div style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--fg-3)' }}>{d}</div>
               </div>
             </button>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BrowseTopics() {
+  return (
+    <section style={{ ...WRAP, paddingTop: 72, paddingBottom: 24 }} className="stack-pad">
+      <SectionHead over={tr('Browse by topic', 'Parcourir par thème')} title={tr('Explore our Help topics', 'Explorez nos thèmes d’aide')} sub={tr('Open a dedicated guide for step-by-step help on the topic you need.', 'Ouvrez un guide dédié pour une aide pas à pas sur le thème dont vous avez besoin.')} />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }} className="grid-3">
+        {TOPIC_PAGES.map(([ic, label, desc, href], i) => (
+          <Reveal key={href} delay={(i % 3) * 60}>
+            <a href={href} className="lift" style={{ display: 'flex', flexDirection: 'column', gap: 14, background: '#fff', border: '1px solid var(--border-1)', borderRadius: 18, padding: 24, textDecoration: 'none', height: '100%' }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: 'var(--tako-black)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><SIcon name={ic} size={24} /></div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18, color: 'var(--tako-black)' }}>{label}</div>
+                <div style={{ fontFamily: 'var(--font-text)', fontSize: 14, color: 'var(--fg-3)', lineHeight: 1.5, marginTop: 4 }}>{desc}</div>
+              </div>
+              <span className="link-amber" style={{ fontSize: 15 }}>{tr('View topic', 'Voir le thème')} <SIcon name="arrow-right" size={17} /></span>
+            </a>
           </Reveal>
         ))}
       </div>
@@ -140,6 +172,7 @@ function Help() {
     <div style={{ background: '#fff' }}>
       <Nav active="help.html" />
       <HelpHero query={query} setQuery={setQuery} />
+      <BrowseTopics />
       <Categories setQuery={setQuery} />
       <FAQList query={query} />
       <ContactBand />
