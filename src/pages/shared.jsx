@@ -48,7 +48,7 @@ function SiteLogo({ dark = false, size = 34, href = 'index.html' }) {
   return (
     <a href={href} style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
       <img src="assets/tako-mark.png" alt="Tako" style={{ height: size, width: size, objectFit: 'contain' }} />
-      <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: size * 0.62,
+      <span className="notranslate" translate="no" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: size * 0.62,
         letterSpacing: '-0.02em', color: dark ? '#fff' : 'var(--tako-black)' }}>Tako</span>
     </a>
   );
@@ -151,8 +151,9 @@ function Nav({ active }) {
             ))}
           </nav>
           <div className="nav-right">
-            <button onClick={() => setLang(getLang() === 'fr' ? 'en' : 'fr')} className="nav-link desktop-only"
-              aria-label="Switch language" style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none' }}>
+            <button onClick={() => setLang(getLang() === 'fr' ? 'en' : 'fr')} className="nav-link desktop-only notranslate"
+              translate="no" aria-label="Switch language" title="English / Français"
+              style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', cursor: 'pointer' }}>
               <SIcon name="globe" size={18} /> {getLang().toUpperCase()}
             </button>
             <a href="help.html" className="nav-link desktop-only">{t('Help', 'Aide')}</a>
