@@ -111,13 +111,15 @@ function AllCities() {
         <SectionHead over={tr('Every city', 'Chaque ville')} title={tr('The full Tako map', 'La carte complète de Tako')} />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12 }} className="grid-4">
           {CITIES.map((c, i) => (
-            <Reveal key={c.name} delay={(i % 4) * 50} className="lift" style={{ background: '#fff', border: '1px solid var(--border-1)', borderRadius: 16, padding: '20px 22px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-                <SIcon name="map-pin" size={18} color={c.status === 'live' ? 'var(--tako-amber-deep)' : 'var(--gray-400)'} />
-                <span style={{ width: 8, height: 8, borderRadius: 999, background: c.status === 'live' ? 'var(--success)' : 'var(--warning)' }} />
-              </div>
-              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18 }}>{c.name}</div>
-              <div style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-3)', fontWeight: 600 }}>{c.region}</div>
+            <Reveal key={c.name} delay={(i % 4) * 50}>
+              <a href={`city.html?name=${encodeURIComponent(c.name)}`} className="lift" style={{ display: 'block', background: '#fff', border: '1px solid var(--border-1)', borderRadius: 16, padding: '20px 22px', textDecoration: 'none', color: 'var(--fg-1)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                  <SIcon name="map-pin" size={18} color={c.status === 'live' ? 'var(--tako-amber-deep)' : 'var(--gray-400)'} />
+                  <span style={{ width: 8, height: 8, borderRadius: 999, background: c.status === 'live' ? 'var(--success)' : 'var(--warning)' }} />
+                </div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18 }}>{c.name}</div>
+                <div style={{ fontFamily: 'var(--font-text)', fontSize: 13, color: 'var(--fg-3)', fontWeight: 600 }}>{c.region}</div>
+              </a>
             </Reveal>
           ))}
         </div>

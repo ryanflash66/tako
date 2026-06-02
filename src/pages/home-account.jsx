@@ -267,7 +267,7 @@ function AccountActivity({ user, onOpenTrip, onAllTrips }) {
         <div>
           <div style={sectionLabel}>{tr('Suggestions', 'Suggestions')}</div>
           <div style={{ display: 'grid', gap: 12 }}>
-            {[['car', tr('Ride', 'Course'), 'ride.html'], ['calendar-clock', tr('Reserve', 'Réserver'), 'ride.html'], ['steering-wheel', tr('Drive', 'Conduire'), 'drive.html']].map(([ic, l, href]) => (
+            {[['car', tr('Ride', 'Course'), 'ride.html'], ['calendar-clock', tr('Reserve', 'Réserver'), 'reserve.html'], ['steering-wheel', tr('Drive', 'Conduire'), 'drive.html']].map(([ic, l, href]) => (
               <a key={l} href={href} className="lift" style={{ display: 'flex', alignItems: 'center', gap: 14, background: 'var(--bg-2)', border: '1px solid var(--border-1)', borderRadius: 16, padding: '18px 20px', textDecoration: 'none', color: 'var(--fg-1)' }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: '#fff', border: '1px solid var(--border-1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><SIcon name={ic === 'steering-wheel' ? 'navigation' : ic} size={22} /></div>
                 <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 17 }}>{l}</span>

@@ -110,6 +110,7 @@ function RideOptions() {
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><SIcon name="user" size={15} /> {t.seats} {tr('seat', 'place')}{t.seats !== '1' ? 's' : ''}</span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><SIcon name="clock" size={15} /> ~{t.etaMin} {tr('min away', 'min')}</span>
               </div>
+              <a href={`tier.html?key=${t.key}`} className="link-amber" style={{ fontSize: 14, marginTop: 14, display: 'inline-flex' }}>{tr('Learn more', 'En savoir plus')} <SIcon name="arrow-right" size={16} /></a>
             </div>
           </Reveal>
         ))}

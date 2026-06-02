@@ -235,9 +235,9 @@ function DownloadBand() {
 
 function Footer() {
   const cols = [
-    [t('Ride', 'Course'), [['Cities', 'cities.html', 'Villes'], ['Safety', 'safety.html', 'Sécurité'], ['Tako Business', 'business.html', 'Tako Entreprise'], ['Help Centre', 'help.html', 'Centre d’aide']]],
-    [t('Drive', 'Conduire'), [['Become a driver', 'drive.html', 'Devenir chauffeur'], ['Requirements', 'drive.html', 'Conditions'], ['Driver app', 'drive.html', 'App chauffeur'], ['Earnings', 'drive.html', 'Revenus']]],
-    [t('Company', 'Entreprise'), [['About', 'about.html', 'À propos'], ['Careers', 'careers.html', 'Carrières'], ['Newsroom', 'newsroom.html', 'Actualités'], ['Contact', 'help.html', 'Contact']]],
+    [t('Ride', 'Course'), [['Reserve', 'reserve.html', 'Réserver'], ['Airport rides', 'airport.html', 'Trajets aéroport'], ['Cities', 'cities.html', 'Villes'], ['Safety', 'safety.html', 'Sécurité'], ['Tako Business', 'business.html', 'Tako Entreprise'], ['Help Centre', 'help.html', 'Centre d’aide']]],
+    [t('Drive', 'Conduire'), [['Become a driver', 'drive.html', 'Devenir chauffeur'], ['Requirements', 'requirements.html', 'Conditions'], ['Driver app', 'driver-app.html', 'App chauffeur'], ['Earnings', 'earnings.html', 'Revenus']]],
+    [t('Company', 'Entreprise'), [['About', 'about.html', 'À propos'], ['Careers', 'careers.html', 'Carrières'], ['Newsroom', 'newsroom.html', 'Actualités'], ['Contact', 'contact.html', 'Contact']]],
   ];
   return (
     <footer style={{ background: 'var(--tako-black)', color: '#fff' }}>
